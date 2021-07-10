@@ -71,7 +71,7 @@ export default function SideNavBar() {
                     <li class="sidebar-item"><a class="sidebar-link" href="#">Transaction 3</a></li>
                 </ul>
             </li>
-
+            
             <li class="sidebar-item">
                 <a data-bs-target="#Account" data-bs-toggle="collapse" class="sidebar-link">
                     <i class="align-middle" data-feather="user"></i> <span class="align-middle">Account</span>
@@ -104,13 +104,13 @@ export default function SideNavBar() {
             </li>
 
             <li class="sidebar-item">
-                <a class="sidebar-link" href="pages-sign-in.html">
+                <a class="sidebar-link" href="/login">
                     <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
                 </a>
             </li>
 
             <li class="sidebar-item">
-                <a class="sidebar-link" href="pages-sign-up.html">
+                <a class="sidebar-link" href="/singUp">
                     <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Sign
                         Up</span>
                 </a>
