@@ -1,5 +1,13 @@
 .card {
-    display: inline-block;
-    border: solid 1px #eee;
-    box-shadow: 0px 20px 20px #ccc;
+  display: inline-block;
+  border: solid 1px #fff;
+  box-shadow: 0px 5px 5px #ccc;
+  width: 100%;
+}
+.status_look {
+  border-radius: 10px !important;
+  background-color: lightgreen !important;
+  font-size: 12px;
+  width: 50px;
+  color: green !important;
 }
