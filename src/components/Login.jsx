@@ -9,7 +9,7 @@ const loginSchema = Yup.object().shape({
   role: Yup.string().label("Role"),
 });
 export default function Login({ onLogin }) {
-  const [role, setRole] = useState('');
+  const [role, setRole] = useState('admin');
   const handleChange=(e)=>{
     setRole(e.target.value);
     console.log(e.target.value);
@@ -21,7 +21,7 @@ export default function Login({ onLogin }) {
         initialValues={{
           username: "",
           password: "",
-          role:""
+          role:"admin"
         }}
         validationSchema={loginSchema}
         onSubmit={(values) => {
@@ -33,7 +33,6 @@ export default function Login({ onLogin }) {
       >
         {({ errors, touched }) => (
           <Form>
-
             <div class="mb-4 mt-5 ">
               <Field
                 name="username"
@@ -69,7 +68,6 @@ export default function Login({ onLogin }) {
             
             <div class="mb-4 mt-5 text-primary">
             <Field type='select'  component="select" name="role" value={role} className={"form-control"} onChange={ handleChange }>
-                   <option  value="select">Role</option>
                    <option  value="admin">Admin</option>
                    <option  value="user">User</option>
                 </Field>
