@@ -16,9 +16,9 @@ const CardProduct = ({product}) => {
              
             </div>
           </div>
-          <div className="col-sm-4 col-md-2 col-lg-2 mt-3">
+          <div className="col-sm-4 col-md-2 col-lg-2 mt-3 ">
             <div className="pad">
-            <h4 className="fw-bold">{product.title}</h4>
+            <h4 className="lead">{product.title}</h4>
             </div>
           </div>
 
@@ -41,7 +41,7 @@ const CardProduct = ({product}) => {
             <div className="pad">
             
               <p>
-                {new Date(product.createdAt).toLocaleDateString()}
+                {new Date().toLocaleDateString()}
               </p>
             </div>
           </div>
