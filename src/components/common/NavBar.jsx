@@ -152,7 +152,7 @@ export default function NavBar() {
                         data-bs-toggle="dropdown">
                         <img src="https://zeebraline.com/img/noimg.png" class="avatar img-fluid rounded me-1"
                             alt="Charles Hall" />
-                        <span class="text-dark">{user?.username}</span>
+                        <span class="text-dark">{user?.name}</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end">
                         <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1"

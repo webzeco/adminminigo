@@ -63,7 +63,6 @@ export const productData = [
         chargeTax: false,
         bucketPrice: 5,
 
-
         stockKeepingUnit: "ISBG8454",
         barcode: "AJLDHIU453",
         trackQuantity: true,
@@ -97,7 +96,6 @@ export const productData = [
                 { id: 3, text: "L" },
                 { id: 4, text: "XL" },
                 { id: 5, text: "XXL" }
-
             ]
         },
         {
@@ -109,10 +107,8 @@ export const productData = [
             ]
         },
         ],
-
         description: "<h3>Material:</h3><ul><li>Wool</li><li>Cotton</li></ul><h3>Quality:</h3><p>This is a <strong>high</strong> quality product that will make you feel comfortable and <strong>attractive.</strong></p>"
         , imgNames: ["https://png.pngtree.com/png-clipart/20210627/original/pngtree-eat-sleep-game-repeat-t-shirt-design-png-image_6467189.jpg", "2.jpg", "3.jpg", "IMG_2484.jpg"]
-
     }
     , {
         title: "Classic chair",
