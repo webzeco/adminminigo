@@ -46,8 +46,8 @@ export default function Categories({ categories, createSubCategory,deleteSubCate
         </div>
       </div>
       <div class="container-fluid bg_color pt-3  rounded h-100">
-        <div class="card w-auto rounded bg-light">
-          <div class="row d-flex justify-content-around px-3">
+        <div class="card w-100 rounded">
+          <div class="row d-flex justify-content-around  px-3">
             <div class="col-lg-3 col-md-3 mt-3 pb-5">
               <Formik
                 initialValues={{
@@ -64,11 +64,11 @@ export default function Categories({ categories, createSubCategory,deleteSubCate
               >
                 {({ errors, touched }) => (
                   <Form>
-                    <div class="mb-4 mt-5 ">
+                    <div class="mb-4 mt-2 ">
                       <Field
                         name="name"
                         className="form-control"
-                        placeholder="name"
+                        placeholder="Name"
                       />
                       {errors.name && touched.name ? (
                         <div class="alert alert-danger  p-2" parent="alert">
@@ -82,7 +82,7 @@ export default function Categories({ categories, createSubCategory,deleteSubCate
                         name="description"
                         type="description"
                         className="form-control"
-                        placeholder="description"
+                        placeholder="Description"
                       />
                       {errors.description && touched.description ? (
                         <div class="alert alert-danger  p-2 p-2 " parent="alert">
@@ -99,9 +99,10 @@ export default function Categories({ categories, createSubCategory,deleteSubCate
                         </label>
                       </div>
                     </div> */}
-                    <div class="mb-4 mt-5 text-primary">
-                      <Field type='select'  component="select" name="parent" value={parent} className={"form-control"} onChange={handleChange}>
-                        <option value={'select parent'}>select parent</option>
+                    <div class="mb-4  text-primary">
+                      <Field type='select'  component="select" name="parent" value={parent}
+                       className={"form-control"} onChange={handleChange}>
+                        <option value={'select parent'}>Select Parent</option>
                         {categories.data.map(cate => {
                           return <option value={cate.category}>{cate.category}</option>
                         })}
@@ -120,6 +121,7 @@ export default function Categories({ categories, createSubCategory,deleteSubCate
                   </Form>
                 )}
               </Formik>
+              </div>
               <div class="col-lg-9 col-md-12 p-3 mt-2 ">
                 <table class="table">
                   <thead class="bg-info text-white ">
@@ -170,6 +172,6 @@ export default function Categories({ categories, createSubCategory,deleteSubCate
           </div>
         </div>
       </div>
-    </div>
+    
   );
 }

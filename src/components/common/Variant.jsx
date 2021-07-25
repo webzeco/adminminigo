@@ -52,14 +52,18 @@ class VariantsDataComponent extends Component {
 
     render() {
         return (
-            <div>
-                <h2>Options</h2>
+            <div >
+                <h4>Options</h4>
+                <button class="btn btn-primary mt-2 text-center" onClick={(e) => this.addOption(e)}>Add another Option</button>
+              
                 {variantsData.map(
                     (item) => {
-                        return <OptionComponent id={item.id} selectedOption={item.selectedOption} tags={item.tags} />
+                        return <
+                            OptionComponent id={item.id} selectedOption={item.selectedOption} tags={item.tags} />
                     }
                 )}
-                <button onClick={(e) => this.addOption(e)}>Add another Option</button>
+                
+               
             </div >
         )
     }
@@ -102,9 +106,10 @@ class OptionComponent extends Component {
 
     render() {
         return (
-            <div>
-                <label htmlFor={`option` + this.props.id} >Option {this.props.id}</label>
-                <select name='options' id={'option' + this.props.id} onChange={(e) => this.onChangeHandler(e)}>
+                          <div className="card p-3 mt-3 d-flex mx-5">
+                <h4 className="bg-info text-white p-2  text-center" htmlFor={`option` + this.props.id} >Varient Option {this.props.id}</h4>
+                <select className="mb-2 form-select " name='options' id={'option' + this.props.id}
+                 onChange={(e) => this.onChangeHandler(e)}>
                     <option value='Title'>Title</option>
                     <option value='Color'>Color</option>
                     <option value='Style'>Style</option>
@@ -114,7 +119,10 @@ class OptionComponent extends Component {
                 {this.state.selectedOption === 'Color' ? <ColorPickerInput sendTags={(tags => this.saveData(tags))} /> :
                     <Tags sendTags={(tags) => this.saveData(tags)} />}
 
-            </div>
+</div>
+
+
+            
         )
     }
 }
@@ -148,7 +156,7 @@ const ColorPickerInput = props => {
                     (picker) => <ColorPicker id={picker.id} setText={(tag) => sendTag(tag)} />
                 )
             }
-            <button onClick={addColor}>Add more Color</button>
+            <button className="btn btn-primary mt-2 text-center" onClick={addColor}>Add more Color</button>
         </>
     )
 }
