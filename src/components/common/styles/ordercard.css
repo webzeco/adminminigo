@@ -1,0 +1,20 @@
+.lead {
+    font-size: small !important;
+  }
+  .pad {
+    font-size: small !important;
+  }
+  
+  .card {
+    display: inline-block;
+    border: solid 1px #fff;
+    box-shadow: 0px 5px 5px #ccc;
+  }
+  .status_look {
+    border-radius: 10px !important;
+    background-color: lightgreen !important;
+    font-size: 12px;
+    width: 50px;
+    color: green !important;
+  }
+  

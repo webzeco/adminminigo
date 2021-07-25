@@ -1,5 +1,5 @@
 import http from './httpservice';
-const url =`${process.env.REACT_APP_URL}/api/v1/users`;
+const url =`${process.env.REACT_APP_URL}/api/v1/user`;
 export function addUser(user) {
     return http.post(url, {
 	email:user.email,

@@ -8,7 +8,7 @@ import { variantsData } from './common/Variant';
 import Media from './common/MediaComponent';
 // import { productData } from '../data'
 //import "./utils/style/addProductComponent.css";
-const AddProduct = () => {
+const AddProduct = ({addProduct}) => {
     const [description, setDescription] = useState('');
     const [imgList, setImgList] = useState([]);
     const [images, setImages] = useState();
@@ -41,12 +41,41 @@ const AddProduct = () => {
         })
         ,
         onSubmit: values => {
+            const form=new FormData();
             values.description = description;
             values.variants = variantsData;
+            console.log({variantsData});
             values.imgNames = imgList;
-            values.images = images
-            // productData.push(values)
-         console.log(values);
+            // values.images = images;
+            images.forEach(img => {
+                form.append("images",img)
+            });
+            for (const key in values) {
+                if (typeof(values[key]) === 'object') 
+                    form.append(key,JSON.stringify(values[key],["id","selectedOption","tags","text"]));
+            else
+               form.append(key,values[key]);
+            }
+            function appendArray(form_data, values, name){
+                if(!values && name)
+                    form_data.append(name, '');
+                else{
+                    if(typeof values == 'object'){
+                        for(let key in values){
+                            if(typeof values[key] == 'object')
+                                appendArray(form_data, values[key], name + '[' + key + ']');
+                            else
+                                form_data.append(name + '[' + key + ']', values[key]);
+                        }
+                    }else
+                        form_data.append(name, values);
+                }
+            
+                return form_data;
+            }
+         console.log({images});
+         appendArray(form,variantsData)
+         addProduct(form);
         }
     })
     return (
