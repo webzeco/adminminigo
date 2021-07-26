@@ -1,17 +1,19 @@
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import './styles/login.css';
+import { CategoryContext } from "./contexts/categoryContext";
 const loginSchema = Yup.object().shape({
   name: Yup.string().required("Required").label("name"),
   description: Yup.string().required("Required").label("description"),
   parent: Yup.string().label("parent"),
 });
-export default function Categories({ categories, createSubCategory,deleteSubCategory }) {
-  console.log(categories);
+export default function Categories() {
+  // console.log(categories);
+  const {categories, deleteSubCategoryHandler, createSubCategoryHandler} = useContext(CategoryContext)
   const [parent, setParent] = useState('select parent');
-  const [main, setMain] = useState(false);
+  // const [main, setMain] = useState(false);
   // const [Count, setCount] = useState(0);
   let count=0;
   const handleChange = (e) => {
@@ -21,7 +23,7 @@ export default function Categories({ categories, createSubCategory,deleteSubCate
   const mainHandleChange = () => {
     // setParent(e.target.value);
     // console.log(e.target.value);
-    setMain(main?false:true);
+    // setMain(main?false:true);
   }
 
   return (
@@ -58,7 +60,7 @@ export default function Categories({ categories, createSubCategory,deleteSubCate
                 validationSchema={loginSchema}
                 onSubmit={(values) => {
                   values.parent = parent;
-                  createSubCategory(values);
+                  createSubCategoryHandler(values);
                   console.log(values);
                 }}
               >
@@ -103,7 +105,7 @@ export default function Categories({ categories, createSubCategory,deleteSubCate
                       <Field type='select'  component="select" name="parent" value={parent}
                        className={"form-control"} onChange={handleChange}>
                         <option value={'select parent'}>Select Parent</option>
-                        {categories.data.map(cate => {
+                        {categories.map(cate => {
                           return <option value={cate.category}>{cate.category}</option>
                         })}
                       </Field>
@@ -135,8 +137,8 @@ export default function Categories({ categories, createSubCategory,deleteSubCate
                     </tr>
                   </thead>
                   <tbody>
-                  {categories.data.map((cate )=> {
-                   return cate.subCategories.map((subCate )=> {
+                  {categories?.map((cate )=> {
+                   return cate?.subCategories?.map((subCate )=> {
                      count+=1;
                           return <tr key={count}>
                           <td>
@@ -155,7 +157,7 @@ export default function Categories({ categories, createSubCategory,deleteSubCate
                                 class="btn btn-light text-light bg-danger  border"
                                 type="button"
                                 aria-expanded="false"
-                                onClick={()=>deleteSubCategory({category:cate.category,subCategory:subCate.name})}
+                                onClick={()=>deleteSubCategoryHandler({category:cate.category,subCategory:subCate.name})}
                               >
                                 Delete
                               </button>

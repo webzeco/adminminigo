@@ -19,6 +19,7 @@ import { getMe } from '../services/UsersService';
 import { getAllOrders } from '../services/orderServices';
 import OrderDetail from './OrderDetail';
 import { createSubCategory, deleteSubCategory, getAllCategories } from '../services/categoryService';
+import { CategoryContext } from './contexts/categoryContext';
 
 export default function Main() {
   const history = useHistory();
@@ -39,6 +40,16 @@ export default function Main() {
   }, [user]);
 
   useEffect(() => {
+    // if (!user) {
+    // history.push('/login');
+    // }
+    // getAllCategories();
+    return () => {
+      console.log('clean up');
+    }
+  }, [categories]);
+
+  useEffect(() => {
     getAllProductHandler();
     getMeHandler();
     getAllOrderHandler();
@@ -47,15 +58,16 @@ export default function Main() {
       console.log('clean up');
     }
   }, []);
-  
+
   const loginHandler = async (user) => {
     try {
       const { data } = await login(user)
       localStorage.setItem("jwt", data.token);
-      toast.success("logged in successfully !!!",{
+      toast.success("logged in successfully !!!", {
         position: toast.POSITION.TOP_CENTER
       });
-      history.push('/');
+      // history.push('/');
+      window.location='/';
     } catch (error) {
       toast.error("Incorrect username or password", {
         position: toast.POSITION.TOP_CENTER,
@@ -82,15 +94,14 @@ export default function Main() {
     setUser(data);
   }
   const getAllCategoriesHandler = async () => {
-
     const { data } = await getAllCategories();
-    // console.log({ data });
-    setCategories(data);
+    console.log(data.data);
+    setCategories(data.data);
   }
   const getAllProductHandler = async () => {
     try {
       const { data } = await getAllProducts();
-      setProducts(data.data);
+      setProducts(data);
     } catch (error) {
       toast.error("something went wrong to get all products", {
         position: toast.POSITION.TOP_CENTER,
@@ -100,84 +111,109 @@ export default function Main() {
   }
 
   const setOrderForDetailHandler = (order) => {
-setOrderForDetail(order)
-console.log(order);
+    setOrderForDetail(order)
+    console.log(order);
     history.push('/orderDetail');
   }
-  
-  const addProductHandler=async (product)=>{
+
+  const addProductHandler = async (product) => {
     console.log(product);
     addNewProduct(product);
   }
-  const createSubCategoryHandler=async (data)=>{
+  const createSubCategoryHandler = async (data) => {
+    const allCates = [...categories];
+    const targetIndex = allCates.findIndex(cate => cate.category === data.parent);
+     allCates[targetIndex].subCategories.push(data);
+    //  for (let i = 0; i < allCates[targetIndex].subCategories.length; i++) {
+    //    const sub = allCates[targetIndex].subCategories[i];
+    //    if(sub.name===data.name){
+
+    //     return alert('already existed')
+    //      }
+    //  }
+    // console.log({requiredSubCates});
+    // allCates[targetIndex].subCategories = requiredSubCates;
+    console.log({ categories });
+    console.log({ allCates });
+    setCategories(allCates);
     createSubCategory(data);
-    getAllCategoriesHandler();
+    // getAllCategoriesHandler();
   }
-  const deleteSubCategoryHandler=async (data)=>{
+  const deleteSubCategoryHandler = async (data) => {
+    const allCates = [...categories];
+    const targetIndex = allCates.findIndex(cate => cate.category === data.category);
+    const requiredSubCates = allCates[targetIndex].subCategories.filter(sub => sub.name !== data.subCategory);
+    console.log({requiredSubCates});
+    allCates[targetIndex].subCategories = requiredSubCates;
+    console.log({ cate: categories[targetIndex].subCategories });
+    console.log({ all: allCates[targetIndex].subCategories });
+    setCategories(allCates);
     deleteSubCategory(data);
-    getAllCategoriesHandler();
+    // getAllCategoriesHandler();
   }
   return (
     <UserContext.Provider value={{ user: user, loginHandler }}>
-      <div class="wrapper">
-        <ToastContainer style={{ width: "322px" }} />
-        {/* {user &&  <SideNavBar /> } */}
-        <SideNavBar />
-        <div class="main">
-          {/* {user &&  <NavBar /> } */}
-          <NavBar />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route
-              exact
-              path="/addProduct"
-              render={(props) => <AddProduct addProduct={addProductHandler} />}
-            />
-            <Route
-              exact
-              path="/showProduct"
-              render={(props) => <ShowProducts products={products} />}
-            />
-           
-            <Route
-              exact
-              path="/login"
-              render={(props) => <Login onLogin={loginHandler} />}
-            />
-            <Route
-              exact
-              path="/signUp"
-              render={(props) => <Login onLogin={loginHandler} />}
-            />
-            <Route
-              exact
-              path="/orders"
-              render={(props) => <Orders  orders={orders} setOrderForDetail={setOrderForDetailHandler}/>}
-            />
-             <Route
-              exact
-              path="/orderDetail"
-              render={(props) => <OrderDetail order={OrderForDetail} />}
-            />
-            <Route
-              exact
-              path="/staff"
-              render={(props) => <Staff />}
-            />
-            <Route
-              exact
-              path="/categories"
-              render={(props) => <Categories deleteSubCategory={deleteSubCategoryHandler} createSubCategory={createSubCategoryHandler} categories={categories} />}
-            />
-            <Route
-              exact
-              path="*"
-              render={(props) => <NotFound />}
-            />
-          </Switch>
-        </div>
+      <CategoryContext.Provider value={{ categories, deleteSubCategoryHandler, createSubCategoryHandler }}>
+        <div class="wrapper">
+          <ToastContainer style={{ width: "322px" }} />
+          {/* {user &&  <SideNavBar /> } */}
+          <SideNavBar />
+          <div class="main">
+            {/* {user &&  <NavBar /> } */}
+            <NavBar />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route
+                exact
+                path="/addProduct"
+                render={(props) => <AddProduct addProduct={addProductHandler} />}
+              />
+              <Route
+                exact
+                path="/showProduct"
+                render={(props) => <ShowProducts products={products} />}
+              />
 
-      </div>
+              <Route
+                exact
+                path="/login"
+                render={(props) => <Login onLogin={loginHandler} />}
+              />
+              <Route
+                exact
+                path="/signUp"
+                render={(props) => <Login onLogin={loginHandler} />}
+              />
+              <Route
+                exact
+                path="/orders"
+                render={(props) => <Orders orders={orders} setOrderForDetail={setOrderForDetailHandler} />}
+              />
+              <Route
+                exact
+                path="/orderDetail"
+                render={(props) => <OrderDetail order={OrderForDetail} />}
+              />
+              <Route
+                exact
+                path="/staff"
+                render={(props) => <Staff />}
+              />
+              <Route
+                exact
+                path="/categories"
+                render={(props) => <Categories />}
+              />
+              <Route
+                exact
+                path="*"
+                render={(props) => <NotFound />}
+              />
+            </Switch>
+          </div>
+
+        </div>
+      </CategoryContext.Provider>
     </UserContext.Provider>
 
   )

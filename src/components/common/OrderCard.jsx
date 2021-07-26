@@ -16,7 +16,6 @@ export default function OrderCard({order,index,setOrderForDetail}) {
                                 <h4 class="lead">{order.orderBy.name}</h4>
                             </div>
                         </div>
-
                         <div class="col-sm-4 col-md-2 col-lg-2 mt-3 ">
                             <div class="pad">
                                 <h4 class="lead">{order.orderBy.email}</h4>

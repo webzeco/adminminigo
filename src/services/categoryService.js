@@ -10,7 +10,7 @@ export function confirmTransaction(id) {
 }
 export function createSubCategory(data){
     return http.patch(`${url}/addSubCategory/${data.parent}`, {
-        subCategory:data.name,
+        subCategory:data.name.trim(),
         description:data.description
 });
 };

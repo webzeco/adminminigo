@@ -28,7 +28,7 @@ export default function Login({ onLogin }) {
           // same shape as initial values
           values.role=role;
           onLogin(values);
-          console.log(values);
+          // console.log(values);
         }}
       >
         {({ errors, touched }) => (
