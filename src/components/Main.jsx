@@ -101,7 +101,7 @@ export default function Main() {
   const getAllProductHandler = async () => {
     try {
       const { data } = await getAllProducts();
-      setProducts(data);
+      setProducts(data.data);
     } catch (error) {
       toast.error("something went wrong to get all products", {
         position: toast.POSITION.TOP_CENTER,
@@ -151,6 +151,7 @@ export default function Main() {
     deleteSubCategory(data);
     // getAllCategoriesHandler();
   }
+  
   return (
     <UserContext.Provider value={{ user: user, loginHandler }}>
       <CategoryContext.Provider value={{ categories, deleteSubCategoryHandler, createSubCategoryHandler }}>
@@ -162,7 +163,16 @@ export default function Main() {
             {/* {user &&  <NavBar /> } */}
             <NavBar />
             <Switch>
-              <Route exact path="/" component={Home} />
+              {/* <Route exact path="/" component={Home} /> */}
+              <Route
+                exact
+                path="/"
+                render={(props) =>
+                  { 
+                    return  user?<Home />:<Login onLogin={loginHandler} /> 
+                  } 
+                }
+              />
               <Route
                 exact
                 path="/addProduct"
