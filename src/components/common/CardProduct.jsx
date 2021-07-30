@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles/card.css";
-const CardProduct = ({product}) => {
+const CardProduct = ({product,deleteProduct}) => {
   return (
     <>
  
@@ -10,7 +10,7 @@ const CardProduct = ({product}) => {
             <div className="pad text-center">
               <img
                 className="img-fluid w-50"
-                src={"https://www.freeiconspng.com/uploads/women-bag-png-32.png"} 
+                src={`${process.env.REACT_APP_URL}/img/${product.images[0]}`} 
                 alt="Sender"
               />
              
@@ -18,7 +18,7 @@ const CardProduct = ({product}) => {
           </div>
           <div className="col-sm-4 col-md-2 col-lg-2 mt-3 ">
             <div className="pad">
-            <h4 className="lead">{product.title}</h4>
+            <h4 className="lead">{product.name}</h4>
             </div>
           </div>
 
@@ -64,9 +64,8 @@ const CardProduct = ({product}) => {
               <button
                 type="button"
                 className="btn btn-white btn-block "
-                // onClick={}
+                onClick={()=>deleteProduct(product._id)}
               >
-             
                 Delete
               </button>
               </div>

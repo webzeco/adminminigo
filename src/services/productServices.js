@@ -3,6 +3,9 @@ const url =`${process.env.REACT_APP_URL}/api/v1/product`;
 export function getAllProducts() {
     return http.get(`${url}/allProducts`);
 }
+export function deleteProduct(id) {
+    return http.delete(`${url}/delete/${id}`);
+  }
 export function confirmTransaction(id) {
     return http.patch(`${url}/${id}`, {
         status:true
@@ -24,6 +27,9 @@ export function getUserStats(id) {
 }
 export function addNewProduct(product) {
     return http.post(`${url}/addProduct`,product);
+}
+export function addNewProductImages(id,images) {
+    return http.patch(`${url}/addProductImages/${id}`,images);
 }
 const AllServices = {
     getAllProducts,

@@ -70,7 +70,7 @@
 //                     }else
 //                         form_data.append(name, values);
 //                 }
-            
+
 //                 return form_data;
 //             }
 //          console.log({images});
@@ -280,26 +280,79 @@
 
 // export default AddProduct;
 
-import React, { useState } from 'react'
-import { useFormik } from 'formik'
+import React, { useContext, useState } from 'react'
+import { Field, useFormik } from 'formik'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import * as Yup from 'yup';
 import Variants from './common/Variant';
 import Media from './common/MediaComponent';
+import { CategoryContext } from './contexts/categoryContext';
 ///////////////////////////////////////
 // import { productData } from './data'
 //import "./utils/style/addProductComponent.css";
 
-const AddProduct = ({addProduct}) => {
+const AddProduct = ({ addProduct }) => {
     const [description, setDescription] = useState('');
     const [imgList, setImgList] = useState([]);
     const [images, setImages] = useState();
     const [variantsData, setVariantsData] = useState();
+    const { categories, deleteSubCategoryHandler, createSubCategoryHandler } = useContext(CategoryContext)
+    const [parent, setParent] = useState('select parent category');
+    const [children, setChildren] = useState([]);
+    const [child, setChild] = useState('select child category');
+
+  const  fakeReviews=[{
+        id: '1',
+        username: 'Umar',
+        rating: 3,
+        feedback: 'This is a very very mandane product'
+    },
+    {
+        id: '1',
+        username: 'Umar',
+        rating: 2,
+        feedback: 'I am very very disappointed'
+    },
+    ];
+
+  const  fakeVariants= [{
+        id: 1,
+        selectedOption: "Size",
+        tags: [
+            { id: 1, text: "SM" },
+            { id: 2, text: "M" },
+            { id: 3, text: "L" },
+            { id: 4, text: "XL" },
+            { id: 5, text: "XXL" }
+
+        ]
+    },
+    {
+        id: 2,
+        selectedOption: "Color",
+        tags: [
+            { id: 1, text: "#0CF7F7" },
+            { id: 2, text: "#f4d6c6" }
+        ]
+    },
+    ];
+    // const [main, setMain] = useState(false);
+    // const [Count, setCount] = useState(0);
+    const handleParentChange = (e) => {
+        setParent(e.target.value);
+        console.log(categories.find(cate=>cate.category===e.target.value));
+        setChildren(categories.find(cate=>cate.category===e.target.value).subCategories);
+    }
+    const handleChildChange = (e) => {
+        setChild(e.target.value);
+        console.log(e.target.value);
+    }
     const formik = useFormik({
         initialValues: {
-            title: '',
+            name: '',
             price: 0,
+            category: '',
             compareAtPrice: 0.00,
             costPerItem: 0.00,
             chargeTax: false,
@@ -314,9 +367,9 @@ const AddProduct = ({addProduct}) => {
             variants: {},
         },
         validationSchema: Yup.object({
-            // title: Yup.string()
+            // name: Yup.string()
             //     .max(15, "Must be less than 15 characters")
-            //     .min(3, "Title should be more than 3 characters")
+            //     .min(3, "name should be more than 3 characters")
             //     .required('REQUIRED'),
             // description: Yup.string()
             //     .max(1500, "Description should not be more than 1500 characters")
@@ -325,41 +378,18 @@ const AddProduct = ({addProduct}) => {
         })
         ,
         onSubmit: values => {
-            const form=new FormData();
+            const form = new FormData();
             values.description = description;
-            values.variants = variantsData;
-            console.log({variantsData});
+            values.category=`${parent}/${child}`;
+            values.variants = fakeVariants;
+            // console.log({ variantsData });
             values.imgNames = imgList;
             // values.images = images;
             images.forEach(img => {
-                form.append("images",img)
+                form.append("images", img)
             });
-            for (const key in values) {
-                if (typeof(values[key]) === 'object') 
-                    form.append(key,JSON.stringify(values[key],["id","selectedOption","tags","text"]));
-            else
-               form.append(key,values[key]);
-            }
-            function appendArray(form_data, values, name){
-                if(!values && name)
-                    form_data.append(name, '');
-                else{
-                    if(typeof values == 'object'){
-                        for(let key in values){
-                            if(typeof values[key] == 'object')
-                                appendArray(form_data, values[key], name + '[' + key + ']');
-                            else
-                                form_data.append(name + '[' + key + ']', values[key]);
-                        }
-                    }else
-                        form_data.append(name, values);
-                }
-            
-                return form_data;
-            }
-         console.log({images});
-         appendArray(form,variantsData)
-         addProduct(form);
+            // for (const key in values) form.append(key, values[key]); 
+            addProduct(values,form);
         }
     })
 
@@ -367,23 +397,62 @@ const AddProduct = ({addProduct}) => {
         <div className="container">
             <div className="h2">Add Product</div>
             <form onSubmit={formik.handleSubmit}>
-                <label className="title pb-2" htmlFor="title">Title</label>
+                <label className="title pb-2" htmlFor="title">Name</label>
                 <input className="form-control mb-1 w-50"
-                    id='title'
-                    name='title'
+                    id='name'
+                    name='name'
                     type='text'
-                    {...formik.getFieldProps('title')}
+                    {...formik.getFieldProps('name')}
                 />
                 {
-                    formik.touched.title && formik.errors.title ?
-                        (<div>{formik.errors.title}</div>) : null
+                    formik.touched.name && formik.errors.name ?
+                        (<div>{formik.errors.name}</div>) : null
                 }
+                <div class="mb-4  text-primary">
+                    {/* <input type='select'  component="select" name="parent" value={parent}
+                       className={"form-control"} onChange={handleParentChange}>
+                        <option value={'select parent'}>Select Parent</option>
+                        {categories?.map(cate => {
+                          return <option value={cate.category}>{cate.category}</option>
+                        })}
+                      </input> */}
+                    <div className="select-container w-50">
+                    <label className="title pb-2" htmlFor="price">Category</label>
+                        <select  className='form-control' onChange={handleParentChange}>
+                        <option value={parent}>{parent}</option>
+                            {categories?.map((cate) => (
+                                <option value={cate.category}>{cate.category}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="select-container w-50">
+                    <label className="title py-2" htmlFor="price">Sub Category</label>
+                        <select  className='form-control' onChange={handleChildChange}>
+                        <option value={child}>{child}</option>
+                            {children?.map((cate) => (
+                                <option value={cate.name}>{cate.name}</option>
+                            ))}
+                        </select>
+                    </div>
+                    {/* <input type='select'  component="select" name="child" value={child}
+                       className={"form-control"} onChange={handleChildChange}>
+                        <option value={'select child'}>Select Child</option>
+                        {children?.map(cate => {
+                          return <option value={cate.name}>{cate.name}</option>
+                        })}
+                      </input> */}
+                    {/* {errors.parent && touched.parent ? (
+                        <div class="alert alert-danger  p-2" parent="alert">
+                          {errors.parent}
+                        </div>
+                      ) : null} */}
+                </div>
 
                 {/* .............................................. */}
                 <label className="title pb-2" htmlFor="title">Discription</label>
+
                 <CKEditor editor={ClassicEditor}
                     data={description}
-
                     onChange={(event, editor) => {
                         const data = editor.getData();
                         setDescription(data);

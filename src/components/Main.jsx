@@ -14,7 +14,7 @@ import Staff from './Staff';
 import Categories from './Categories';
 import { ToastContainer, toast } from 'react-toastify';
 import { login } from '../services/authService';
-import { addNewProduct, getAllProducts } from '../services/productServices';
+import { addNewProduct, addNewProductImages, deleteProduct, getAllProducts } from '../services/productServices';
 import { getMe } from '../services/UsersService';
 import { getAllOrders } from '../services/orderServices';
 import OrderDetail from './OrderDetail';
@@ -116,9 +116,16 @@ export default function Main() {
     history.push('/orderDetail');
   }
 
-  const addProductHandler = async (product) => {
+  const addProductHandler = async (product,images) => {
     console.log(product);
-    addNewProduct(product);
+  const newProduct=  await addNewProduct(product);
+  console.log(newProduct);
+        await addNewProductImages(newProduct.data.product._id,images);
+    toast.success("Product added successfully !!!", {
+      position: toast.POSITION.TOP_CENTER
+    });
+    // history.push('/');
+    window.location='/';
   }
   const createSubCategoryHandler = async (data) => {
     const allCates = [...categories];
@@ -152,6 +159,23 @@ export default function Main() {
     // getAllCategoriesHandler();
   }
   
+
+const deleteProductHandler = async (id) => {
+  try {
+    const { data } = await deleteProduct(id);
+    const remainProd=[...products];
+    setProducts( remainProd.filter(pro=>pro._id!==id));
+    toast.success("Product successfully deleted", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  } catch (error) {
+    toast.error("something went wrong to get all products", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  }
+console.log({products});
+}
+  
   return (
     <UserContext.Provider value={{ user: user, loginHandler }}>
       <CategoryContext.Provider value={{ categories, deleteSubCategoryHandler, createSubCategoryHandler }}>
@@ -167,10 +191,7 @@ export default function Main() {
               <Route
                 exact
                 path="/"
-                render={(props) =>
-                  { 
-                    return  user?<Home />:<Login onLogin={loginHandler} /> 
-                  } 
+                render={(props) => user?<Home />:<Login onLogin={loginHandler} /> 
                 }
               />
               <Route
@@ -181,7 +202,7 @@ export default function Main() {
               <Route
                 exact
                 path="/showProduct"
-                render={(props) => <ShowProducts products={products} />}
+                render={(props) => <ShowProducts deleteProduct={deleteProductHandler} products={products} />}
               />
 
               <Route
