@@ -381,15 +381,15 @@ const AddProduct = ({ addProduct }) => {
             const form = new FormData();
             values.description = description;
             values.category=`${parent}/${child}`;
-            values.variants = fakeVariants;
-            // console.log({ variantsData });
+             values.variants = variantsData;
+            console.log( variantsData );
             values.imgNames = imgList;
             // values.images = images;
             images.forEach(img => {
                 form.append("images", img)
             });
             // for (const key in values) form.append(key, values[key]); 
-            addProduct(values,form);
+             addProduct(values,form);
         }
     })
 

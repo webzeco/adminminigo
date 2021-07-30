@@ -329,7 +329,7 @@ class VariantsPreview extends Component {
                     this.props.data.map(
                         (variant) => variant.tags.map(
                             (varObject) => {
-                                return <VariantImgSelect addData={(data) => this.props.addData(data)} variant={variant} imgList={this.props.imgList} id={varObject.id} tag={varObject} />
+                                 return <VariantImgSelect addData={(data) => this.props.addData(data)} variant={variant} imgList={this.props.imgList} id={varObject.id} tag={varObject} />
                             }
                         )
 
