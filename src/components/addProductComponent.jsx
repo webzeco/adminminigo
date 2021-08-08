@@ -350,7 +350,7 @@ const AddProduct = ({ addProduct }) => {
     }
     const formik = useFormik({
         initialValues: {
-            name: '',
+            title: '',
             price: 0,
             category: '',
             compareAtPrice: 0.00,
@@ -382,7 +382,7 @@ const AddProduct = ({ addProduct }) => {
             values.description = description;
             values.category=`${parent}/${child}`;
              values.variants = variantsData;
-            console.log( variantsData );
+            console.log( {variantsData} );
             values.imgNames = imgList;
             // values.images = images;
             images.forEach(img => {
@@ -397,16 +397,16 @@ const AddProduct = ({ addProduct }) => {
         <div className="container">
             <div className="h2">Add Product</div>
             <form onSubmit={formik.handleSubmit}>
-                <label className="title pb-2" htmlFor="title">Name</label>
+                <label className="title pb-2" htmlFor="title">Title</label>
                 <input className="form-control mb-1 w-50"
-                    id='name'
-                    name='name'
+                    id='title'
+                    name='title'
                     type='text'
-                    {...formik.getFieldProps('name')}
+                    {...formik.getFieldProps('title')}
                 />
                 {
-                    formik.touched.name && formik.errors.name ?
-                        (<div>{formik.errors.name}</div>) : null
+                    formik.touched.title && formik.errors.title ?
+                        (<div>{formik.errors.title}</div>) : null
                 }
                 <div class="mb-4  text-primary">
                     {/* <input type='select'  component="select" name="parent" value={parent}

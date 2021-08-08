@@ -1,7 +1,14 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify';
 import { UserContext } from '../contexts/UserContext';
-
+const logoutHandler=()=>{
+    localStorage.clear();
+    window.location='/';
+    toast.success("Your are successfully logout", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+}
 export default function SideNavBar() {
     const { user,loginHandler} = useContext(UserContext);
     return (
@@ -74,16 +81,16 @@ export default function SideNavBar() {
                        
 
                             <li className="sidebar-item">
-                                <a className="sidebar-link" href="/">
+                                <Link className="sidebar-link" to="/reviews">
                                     <i className="align-middle" data-feather="align-justify"></i> <span
                                         className="align-middle">Reviews</span>
-                                </a>
+                                </Link>
                             </li>
 
                             <li className="sidebar-item">
-                                <a className="sidebar-link" href="pages-profile.html">
+                                <Link className="sidebar-link" to="/profile">
                                     <i className="align-middle" data-feather="user"></i> <span className="align-middle">Profile</span>
-                                </a>
+                                </Link>
                             </li>
 
                             {/* <li className="sidebar-item">
@@ -92,8 +99,8 @@ export default function SideNavBar() {
                                 </a>
                             </li> */}
 
-                            <li className="sidebar-item" onClick={()=>loginHandler('')}>
-                                <Link className="sidebar-link" href="/singUp">
+                            <li className="sidebar-item" onClick={()=>logoutHandler('')}>
+                                <Link className="sidebar-link" href="/">
                                 <i class="fas fa-sign-out-alt"></i> <span className="align-middle">Logout</span>
                                 </Link>
                             </li>

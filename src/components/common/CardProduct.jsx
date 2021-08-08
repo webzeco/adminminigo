@@ -13,12 +13,11 @@ const CardProduct = ({product,deleteProduct}) => {
                 src={`${process.env.REACT_APP_URL}/img/${product.images[0]}`} 
                 alt="Sender"
               />
-             
             </div>
           </div>
           <div className="col-sm-4 col-md-2 col-lg-2 mt-3 ">
             <div className="pad">
-            <h4 className="lead">{product.name}</h4>
+            <h4 className="lead">{product.title}</h4>
             </div>
           </div>
 
