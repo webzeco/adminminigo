@@ -4,10 +4,12 @@ import { deleteReview, getAllReviews } from '../services/reviewServices';
 
 export default function Reviews() {
     const [reviews, setReviews] = useState([]);
+    
 
     const getAllReviewsHandler = async () => {
         const { data } = await getAllReviews();
-        setReviews(data.data);
+        setReviews(data.data);console.log(data.data);
+
     }
     const onDeleteHandler= async (review)=>{
         console.log({review});
@@ -28,7 +30,7 @@ export default function Reviews() {
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Name</th>
+                        <th scope="col">Product</th>
                         <th scope="col">Email</th>
                         <th scope="col">Rating</th>
                         <th scope="col">Date</th>
@@ -40,7 +42,7 @@ export default function Reviews() {
                     return (
                         <tr>
                             <th scope="row">{index + 1}</th>
-                            <td>{rev.name}</td>
+                            <td>{rev.product?.title}</td>
                             <td>{rev.email}</td>
                             <td><ReactStars
                             value={rev.rating}

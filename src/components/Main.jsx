@@ -92,7 +92,7 @@ export default function Main() {
   }
   const getMeHandler = async () => {
     const { data } = await getMe();
-    // console.log({ data });
+    console.log({ data });
     setUser(data);
   }
   const getAllCategoriesHandler = async () => {
@@ -179,7 +179,7 @@ export default function Main() {
   }
 
   return (
-    <UserContext.Provider value={{ user: user, loginHandler }}>
+    <UserContext.Provider value={{ user, loginHandler }}>
       <CategoryContext.Provider value={{ categories, deleteSubCategoryHandler, createSubCategoryHandler }}>
         <div class="wrapper">
           <ToastContainer style={{ width: "322px" }} />

@@ -3,9 +3,10 @@ import { UserContext } from './contexts/UserContext';
 
 export default function Profile() {
     const { user } = useContext(UserContext);
+    console.log(user);
     const [User, setUser] = useState();
     useEffect(() => {
-        setUser(user?.data)
+        setUser(user?.data);
         return () => {
             console.log("Profile clean up");
         }
@@ -20,8 +21,8 @@ export default function Profile() {
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                 <img class="rounded-circle mt-3 " width="150px"
          src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"/>
-         <span class="font-weight-bold">{User.name}</span>
-         <span class="text-black-50">{User.email}</span>
+         <span class="font-weight-bold">{User?.name}</span>
+         <span class="text-black-50">{User?.email}</span>
          <span className='mx-5 '>
          {/* <input type="file" class="form-control-small btn-danger m-4" /> */}
          </span>

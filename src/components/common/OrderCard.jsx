@@ -1,6 +1,7 @@
 import React from 'react';
 import './styles/ordercard.css';
 export default function OrderCard({order,index,setOrderForDetail}) {
+    console.log({order});
     return (
         <div>
             <div class="container ">
@@ -13,12 +14,12 @@ export default function OrderCard({order,index,setOrderForDetail}) {
                         </div>
                         <div class="col-sm-4 col-md-2 col-lg-2 mt-3 ">
                             <div class="pad">
-                                <h4 class="lead">{order?.orderBy?.name}</h4>
+                                <h4 class="lead">{order?.name}</h4>
                             </div>
                         </div>
                         <div class="col-sm-4 col-md-2 col-lg-2 mt-3 ">
                             <div class="pad">
-                                <h4 class="lead">{order?.orderBy?.email}</h4>
+                                <h4 class="lead">{order?.email}</h4>
                             </div>
                         </div>
 
