@@ -25,7 +25,10 @@ export default function Reviews() {
     }, [])
     return (
         <div>
-            <table class="table caption-top">
+             <div className="container">
+                <div className="display-4 ">Reviews</div>
+            </div>
+            <table class="table caption-top mx-3">
                 <caption>List of latest Reviews</caption>
                 <thead>
                     <tr>
