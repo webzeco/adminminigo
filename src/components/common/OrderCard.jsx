@@ -5,8 +5,8 @@ export default function OrderCard({order,index,setOrderForDetail}) {
     return (
         <div>
             <div class="container ">
-                <div class="card mx-3 w-auto  ">
-                    <div class="row text-center d-flex justify-content-around bg-light pt-3 transCard">
+                <div class="card mx-3 w-100 ">
+                    <div class="row text-center d-flex align-items-center justify-content-around bg-light pt-3 transCard">
                         <div class="col-sm-2 col-md-1 col-lg-1 mt-3 ">
                             <div class="pad">
                                 <h4 class="lead">{index}</h4>
@@ -31,7 +31,7 @@ export default function OrderCard({order,index,setOrderForDetail}) {
 
                         <div class=" col-sm-2 col-md-1 col-lg-1 mt-3">
                             <div class="pad">
-                                <h4 class="status_look pt-1 pb-1">{order.status}</h4>
+                                <h4 class="status_look pt-2 pb-2">{order.status}</h4>
                             </div>
                         </div>
 
