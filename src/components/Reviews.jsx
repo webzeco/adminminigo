@@ -39,6 +39,7 @@ export default function Reviews() {
                     </tr>
                 </thead>
                 {reviews && reviews.map((rev, index) => {
+                    if(index>3) return null;
                     return (
                         <tr>
                             <th scope="row">{index + 1}</th>
