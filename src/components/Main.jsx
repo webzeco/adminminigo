@@ -22,6 +22,7 @@ import { createSubCategory, deleteSubCategory, getAllCategories } from '../servi
 import { CategoryContext } from './contexts/categoryContext';
 import Profile from './Profile';
 import Reviews from './Reviews';
+import Transaction from './Transactions';
 
 export default function Main() {
   const history = useHistory();
@@ -83,7 +84,6 @@ export default function Main() {
     history.push('/');
   }
   const forgotHandler = (user) => {
-
     history.push('/');
   }
   const getAllOrderHandler = async () => {
@@ -92,12 +92,12 @@ export default function Main() {
   }
   const getMeHandler = async () => {
     const { data } = await getMe();
-    console.log({ data });
+    // console.log({ data });
     setUser(data);
   }
   const getAllCategoriesHandler = async () => {
     const { data } = await getAllCategories();
-    console.log(data.data);
+    // console.log(data.data);
     setCategories(data.data);
   }
   const getAllProductHandler = async () => {
@@ -226,6 +226,11 @@ export default function Main() {
                 exact
                 path="/orders"
                 render={(props) => <Orders orders={orders} setOrderForDetail={setOrderForDetailHandler} />}
+              />
+              <Route
+                exact
+                path="/transactions"
+                render={(props) => <Transaction orders={orders} setOrderForDetail={setOrderForDetailHandler} />}
               />
               <Route
                 exact

@@ -3,26 +3,28 @@ import { UserContext } from './contexts/UserContext';
 
 export default function Profile() {
     const { user } = useContext(UserContext);
-    console.log(user);
-    const [User, setUser] = useState();
-    useEffect(() => {
-        setUser(user?.data);
-        return () => {
-            console.log("Profile clean up");
-        }
-    }, [])
+    // console.log({user});
+    const getMe=()=>{
+        console.log(user);
+    }
+    // useEffect(() => {
+    //     getMe();
+    //     return () => {
+    //         console.log("Profile clean up");
+    //     }
+    // }, [])
 
     return (
         <div class="container rounded bg-white mt-5 mb-5">
-    <div class="row">
-        {    console.log(User)
-}
+            <div className="display-5">Profile</div>
+    {user&&(
+        <div class="row">
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                 <img class="rounded-circle mt-3 " width="150px"
          src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"/>
-         <span class="font-weight-bold">{User?.name}</span>
-         <span class="text-black-50">{User?.email}</span>
+         <span class="font-weight-bold">{user?.name}</span>
+         <span class="text-black-50">{user?.email}</span>
          <span className='mx-5 '>
          {/* <input type="file" class="form-control-small btn-danger m-4" /> */}
          </span>
@@ -36,10 +38,10 @@ export default function Profile() {
                     <h4 class="text-right">Profile Settings</h4>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-md-12"><label class="labels">User Name</label><input readOnly type="text" class="form-control" placeholder="Enter User Name" value={User.name}/></div>
+                    <div class="col-md-12"><label class="labels">User Name</label><input readOnly type="text" class="form-control" placeholder="Enter User Name" value={user.name}/></div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" value={User.contactNo}/></div>
+                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" value={user.contactNo}/></div>
                 </div>
 
             </div>
@@ -79,6 +81,7 @@ export default function Profile() {
             </div>
         </div>
     </div>
+    )}
 </div>
 
     )

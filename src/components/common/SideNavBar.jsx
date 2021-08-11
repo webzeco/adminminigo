@@ -66,20 +66,23 @@ export default function SideNavBar() {
                                 </ul>
                             </li>
 
-                            <li className="sidebar-item">
+                            {/* <li className="sidebar-item">
                                 <a data-bs-target="#Transactions" data-bs-toggle="collapse" className="sidebar-link">
-                                    <i className="align-middle" data-feather="dollar-sign"></i> <span
-                                        className="align-middle">Transactions</span>
-                                </a>
+                                    <i className="align-middle" data-feather="dollar-sign"></i>
+                                     <Link  to='/transactions' className="align-middle">Transactions</Link>
+                                </a> */}
                                 {/* <ul id="Transactions" className="sidebar-dropdown collapse" data-bs-parent="#sidebar">
                     <li className="sidebar-item"><a className="sidebar-link" href="#">Transaction 1</a></li>
                     <li className="sidebar-item"><a className="sidebar-link" href="#">Transaction 2</a></li>
                     <li className="sidebar-item"><a className="sidebar-link" href="#">Transaction 3</a></li>
                 </ul> */}
+                            {/* </li> */}
+                            <li className="sidebar-item">
+                                <Link className="sidebar-link" to="/transactions">
+                                    <i className="align-middle" data-feather="dollar-sign"></i> <span
+                                        className="align-middle">Transaction</span>
+                                </Link>
                             </li>
-
-                       
-
                             <li className="sidebar-item">
                                 <Link className="sidebar-link" to="/reviews">
                                     <i className="align-middle" data-feather="align-justify"></i> <span

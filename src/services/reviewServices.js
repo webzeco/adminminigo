@@ -6,9 +6,9 @@ export function getAllReviews() {
 export function deleteReview(id) {
     return http.delete(`${url}/deleteReview/${id}`);
 }
-export function confirmTransaction(id) {
-    return http.patch(`${url}/${id}`, {
-        status:true
+export function updateReview(favorite,id) {
+    return http.patch(`${url}/updateReview/${id}`, {
+        favorite
 });
 }
 export function createSubCategory(data){
