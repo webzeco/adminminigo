@@ -19,10 +19,11 @@ export default function Transactions({ orders ,setOrderForDetail}) {
     return (
         <div>
             <div className="container">
-                <div className="display-4 ">All Transactions</div>
+                <div className="display-6 px-3 fw-bold mt-3 ">All Transactions</div>
             </div>
-            <table class="table caption-top mx-3">
-                <caption>List of latest transaction</caption>
+             <div class="table-responsive">
+            <table class="table mt-3 mx-4">
+               
                 <thead>
                     <tr>
                         <th scope="col">#ID</th>
@@ -37,19 +38,20 @@ export default function Transactions({ orders ,setOrderForDetail}) {
                     console.log(charge.amount);
                     return (
                         <tr>
-                            <th scope="row">{charge.id}</th>
-                            <td>Rs.{charge.amount}</td>
-                            <td><i className={`fab fa-cc-${charge.payment_method_details.card.brand} fa-3x`}></i> {charge.payment_method_details.card.brand}</td>
+                            <td  style={{width:"10%"}}>{charge.id}</td>
+                            <td style={{width:"10%"}}>Rs.{charge.amount}</td>
+                            <td style={{width:"10%"}}><i className={`fab fa-cc-${charge.payment_method_details.card.brand} fa-3x`}></i> {charge.payment_method_details.card.brand}</td>
                             
-                            <td>{order.createdAt.substring(0, 10)}</td>
-                            <td><div class="d-grid gap-1 col-1 mx-auto">
-                                <button class="btn btn-info" onClick={()=>setOrderForDetail(order)} type="button">Detail</button>
-                                <button  class="btn btn-danger" type="button">Delate</button>
+                            <td style={{width:"10%"}}>{order.createdAt.substring(0, 10)}</td>
+                            <td  style={{width:"10%"}}><div class="d-grid gap-1 mx-auto">
+                                <button class="btn btn-sm btn-info" onClick={()=>setOrderForDetail(order)} type="button">Detail</button>
+                                <button  class="btn btn-sm btn-danger" type="button">Delate</button>
                             </div></td>
                         </tr>
                     );
                 })}
             </table>
+        </div>
         </div>
     )
 }

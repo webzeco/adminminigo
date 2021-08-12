@@ -5,7 +5,7 @@ export default function OrderDetail({ order }) {
     return (
         <div>
             <div className="container-fluid pb-5">
-                <div className="display-4 px-3 fw-bold">Order Detail</div>
+                <div className="display-6 px-3 fw-bold mt-3">Order Detail</div>
                 <div className="display-7 px-3">Details for Order ID:<span>{order._id}</span></div>
             </div>
             <div className="container-fluid bg_color pt-3  rounded">

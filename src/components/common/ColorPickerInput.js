@@ -31,7 +31,7 @@ const ColorPickerInput = props => {
                     (picker) => <ColorPicker id={picker.id} setText={(tag) => sendTag(tag)} />
                 )
             }
-            <button onClick={addColor}>Add more Color</button>
+            <button className="btn btn-warning" onClick={addColor}>Add more Color</button>
         </>
     )
 }

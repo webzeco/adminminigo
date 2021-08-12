@@ -31,7 +31,7 @@ export default function Categories() {
       <div class="container-fluid pb-5">
         <div class="row">
           <div class="col-lg-9 .col-md-9">
-            <div class="display-4 px-3 fw-bold mt-3">Categories</div>
+            <div class="display-6 px-3 fw-bold mt-3">Categories</div>
             <div class="display-7 px-3">Add,edit or delete a category</div>
           </div>
           <div class="col-lg-3 .col-md-12 mt-4">
@@ -125,6 +125,7 @@ export default function Categories() {
               </Formik>
               </div>
               <div class="col-lg-9 col-md-12 p-3 mt-2 ">
+              <div class="table-responsive">
                 <table class="table">
                   <thead class="bg-info text-white ">
                     <tr>
@@ -169,6 +170,7 @@ export default function Categories() {
                     
                   </tbody>
                 </table>
+                </div>
               </div>
             </div>
           </div>

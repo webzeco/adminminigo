@@ -394,8 +394,8 @@ const AddProduct = ({ addProduct }) => {
     })
 
     return (
-        <div className="container">
-            <div className="h2">Add Product</div>
+        <div className="container px-3">
+             <div className="display-6 px-3 fw-bold mt-3 ">Add Product</div>
             <form onSubmit={formik.handleSubmit}>
                 <label className="title pb-2" htmlFor="title">Title</label>
                 <input className="form-control mb-1 w-50"

@@ -43,15 +43,16 @@ export default function Reviews() {
     return (
         <div>
             <div className="container">
-                <div className="display-4 ">Reviews</div>
+                <div className="display-6 px-3 fw-bold mt-3 ">Reviews</div>
             </div>
-            <table class="table caption-top mx-3">
-                <caption>List of latest Reviews</caption>
+            <div class="table-responsive">
+            <table className="table mx-2 mt-3">
+               
                 <thead>
-                    <tr>
+                    <tr className="bg-info">
                         <th scope="col">#</th>
                         <th scope="col">Product</th>
-                        <th scope="col">Email</th>
+                        <th   scope="col">Email</th>
                         <th scope="col">Favorite</th>
                         <th scope="col">Rating</th>
                         <th scope="col">Date</th>
@@ -62,27 +63,28 @@ export default function Reviews() {
                 {reviews && reviews.map((rev, index) => {
                     return (
                         <tr>
-                            <th scope="row">{index + 1}</th>
-                            <td>{rev.product?.title}</td>
-                            <td>{rev.email}</td>
-                            <td>
+                            <td className="px-2" style={{width:"5%"}}>{index + 1}</td>
+                            <td style={{width:"25%"}}>{rev.product?.title}</td>
+                            <td style={{width:"25%"}} >{rev.email}</td>
+                            <td className="px-5" style={{width:"10%"}} >
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox"  onChange={(e) => onselectHandler(e, rev._id)} id="flexSwitchCheckChecked" checked={rev.favorite} />
                                 </div>
                             </td>
-                            <td><ReactStars
+                            <td style={{width:"5%"}}><ReactStars
                                 value={rev.rating}
                             />
                             </td>
-                            <td>{rev.createdAt.substring(0, 10)}</td>
-                            <td><div class="d-grid gap-1 col-1 mx-auto">
-                                <button class="btn btn-info" type="button">Detail</button>
-                                <button onClick={() => onDeleteHandler(rev)} class="btn btn-danger" type="button">Delate</button>
+                            <td style={{width:"10%"}}>{rev.createdAt.substring(0, 10)}</td>
+                            <td style={{width:"10%"}}><div class="d-grid gap-1 mx-auto">
+                                <button class="btn btn-sm btn-info" type="button">Detail</button>
+                                <button onClick={() => onDeleteHandler(rev)} class="btn btn-sm btn-danger" type="button">Delate</button>
                             </div></td>
                         </tr>
                     );
                 })}
             </table>
+            </div>
         </div>
     )
 }

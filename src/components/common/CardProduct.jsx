@@ -2,14 +2,13 @@ import React from "react";
 import "./styles/card.css";
 const CardProduct = ({product,deleteProduct}) => {
   return (
-    <>
- 
-      <div className="card mx-3 w-auto ">
-        <div className="row text-center d-flex justify-content-around bg-light pt-3 transCard">
+    <div>
+      <div className="card mx-3 w-100 ">
+        <div className="row text-center d-flex justify-content-around align-items-center bg-light pt-3 transCard">
           <div className="col-sm-4 col-md-2 col-lg-2  ">
             <div className="pad text-center">
               <img
-                className="img-fluid w-50"
+                className="img-fluid w-50 h-50"
                 src={`${process.env.REACT_APP_URL}/img/${product.images[0]}`} 
                 alt="Sender"
               />
@@ -47,22 +46,22 @@ const CardProduct = ({product,deleteProduct}) => {
        
        
 
-          <div className=" col-sm-4  col-md-2 col-lg-2">
+          <div className=" col-sm-4 col-md-2 col-lg-2">
             <div className="pad">
               <div className="row">
-                <div className="col-12">
+                <div className="col-12 mb-2">
             <button
                 type="button"
-                className="btn btn-success   btn-block "
+                className="btn btn-success  btn-block "
                 // onClick={}
               >
                 Edit
               </button>
               </div>
-              <div className="col-12">
+              <div className="col-12 mb-2">
               <button
                 type="button"
-                className="btn btn-white btn-block "
+                className="btn btn-danger btn-block "
                 onClick={()=>deleteProduct(product._id)}
               >
                 Delete
@@ -73,7 +72,7 @@ const CardProduct = ({product,deleteProduct}) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 export default CardProduct;

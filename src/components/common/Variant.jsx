@@ -266,13 +266,13 @@ class VariantsDataComponent extends Component {
     render() {
         return (
             <div>
-                <h2>Options</h2>
+                <h3 className="fw-bold ">Options</h3>
                 {this.props.variantsData.map(
                     (item) => {
                         return <OptionComponent addData={(data) => this.props.addData(data)} id={item.id} selectedOption={item.selectedOption} tags={item.tags} />
                     }
                 )}
-                <button onClick={(e) => { e.preventDefault(); return this.props.addOption(); }}>Add another Option</button>
+                <button className="btn btn-info" onClick={(e) => { e.preventDefault(); return this.props.addOption(); }}>Add another Option</button>
             </div >
         )
     }
@@ -303,9 +303,9 @@ class OptionComponent extends Component {
     }
     render() {
         return (
-            <div>
-                <label htmlFor={`option` + this.props.id} >Option {this.props.id}</label>
-                <select name='options' id={'option' + this.props.id} onChange={(e) => this.onChangeHandler(e)}>
+            <div className="bg-success w-100 mb-4 p-4  justify-content-center">
+                <label className="fw-bold mb-2 " htmlFor={`option` + this.props.id} >Option {this.props.id}</label>
+                <select className="form-control w-50 mb-3" name='options' id={'option' + this.props.id} onChange={(e) => this.onChangeHandler(e)}>
                     <option value='Title'>Title</option>
                     <option value='Color'>Color</option>
                     <option value='Style'>Style</option>
@@ -324,7 +324,9 @@ class VariantsPreview extends Component {
     render() {
         return (
             <>
-                <h2>Variants Preview</h2>
+
+                <h3 className="fw-bold mt-4 mb-2">Variants Preview</h3>
+                <div className="container bg-secondary w-100 mb-3 p-3">
                 {
                     this.props.data.map(
                         (variant) => variant.tags.map(
@@ -334,6 +336,7 @@ class VariantsPreview extends Component {
                         )
 
                     )}
+                    </div>
             </>
         )
     }

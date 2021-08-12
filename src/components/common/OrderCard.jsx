@@ -6,10 +6,10 @@ export default function OrderCard({order,index,setOrderForDetail}) {
         <div>
             <div class="container ">
                 <div class="card mx-3 w-100 ">
-                    <div class="row text-center d-flex align-items-center justify-content-around bg-light pt-3 transCard">
+                    <div class="row text-center d-flex .align-items-center justify-content-around bg-light pt-3 transCard">
                         <div class="col-sm-2 col-md-1 col-lg-1 mt-3 ">
                             <div class="pad">
-                                <h4 class="lead">{index}</h4>
+                                <h4 class="lead fw-bold">{index}</h4>
                             </div>
                         </div>
                         <div class="col-sm-4 col-md-2 col-lg-2 mt-3 ">
@@ -29,9 +29,9 @@ export default function OrderCard({order,index,setOrderForDetail}) {
                             </div>
                         </div>
 
-                        <div class=" col-sm-2 col-md-1 col-lg-1 mt-3">
+                        <div class=" col-sm-2 col-md-1 col-lg-1 mt-3 ">
                             <div class="pad">
-                                <h4 class="status_look pt-2 pb-2">{order.status}</h4>
+                                <h4 class="status_look pt-2 pb-2 ">{order.status}</h4>
                             </div>
                         </div>
 
@@ -46,31 +46,27 @@ export default function OrderCard({order,index,setOrderForDetail}) {
 
                         <div class=" col-sm-4  col-md-2 col-lg-2">
                             <div class="pad">
-                                <div class="row d-flex justify-content-between">
-                                    <div class="col-6">
+                                <div class="row d-grid gap-1 justify-content-center">
+                                    <div class="col-lg-4 col-md-6">
                                         <button
                                             type="button"
                                             onClick={()=>setOrderForDetail(order)}
-                                            class="btn btn-success   btn-block ">Detail
+                                            class="btn btn-sm btn-success   btn-block ">Detail
                                         </button>
                                     </div>
-                                    <div class="col-6">
-                                        <div class="dropdown">
-                                            <button
-                                                class="btn btn-light dropdown-toggle"
-                                                type="button"
-                                                id="dropdownMenuButton"
-                                                data-mdb-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
-                                                ...
-                                            </button>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <li><a class="dropdown-item" href="#">View Detail</a></li>
-                                                <li><a class="dropdown-item" href="#">Edit info</a></li>
-                                                <li><a class="dropdown-item" href="#">Delete</a></li>
-                                            </ul>
-                                        </div>
+                                    <div class="col-lg-4 col-md-6">
+                                    <button
+                                            type="button"
+                                            onClick={()=>setOrderForDetail(order)}
+                                            class="btn btn-sm btn-danger  btn-block ">Delete
+                                        </button>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6">
+                                    <button
+                                            type="button"
+                                            onClick={()=>setOrderForDetail(order)}
+                                            class="btn btn-sm btn-info  btn-block ">Edit
+                                        </button>
                                     </div>
                                 </div>
                             </div>

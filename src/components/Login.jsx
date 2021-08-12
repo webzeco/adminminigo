@@ -15,7 +15,7 @@ export default function Login({ onLogin }) {
     console.log(e.target.value);
   }
   return (
-    <div class="container pt-5 mt-5 pb-5 font_fam w-25">
+    <div class="container pt-5 mt-5 pb-5 font_fam w-auto">
       <h3 class="submit-content fw-bold text-center mt-5">LOGIN</h3>
       <Formik
         initialValues={{
