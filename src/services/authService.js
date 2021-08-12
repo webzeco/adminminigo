@@ -21,15 +21,15 @@ export const forgotPassword=(email)=> {
     );
 };
 
+
 export const resetPassword=(data,token)=> {
     return http.patch(`${url}/resetPassword/${token}`,
         {
             password: data.password,
-            passwordConfirm:data.passwordConfirm
+            passwordConfirm:data.confirmPassword
         }
     );
 };
-
 export const isLogin=()=> {
     const token = localStorage.getItem('jwt')
     if (token) {

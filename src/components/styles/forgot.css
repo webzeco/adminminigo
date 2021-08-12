@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:regular,bold,italic&subset=latin,latin-ext");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap");
+/*Sign in form section*/
+
+.creat_look {
+  font-size: 16px !important ;
+  color: #333333 !important;
+  font-family: "Lato" !important;
+}
+.inputs_look {
+  border-radius: 0px !important;
+}
+.message_look {
+  font-family: "Montserrat";
+}
+.submit-content {
+  font-family: "Montserrat";
+  color: #e4563c;
+}
+.fg_link {
+  color: #999999;
+  text-decoration: none;
+  font-size: 12px !important;
+}
+.fg_link:hover {
+  color: #999999;
+}
+
+.form-control:focus {
+  box-shadow: none !important;
+}
+.creat_btn {
+  font-weight: bold !important;
+  background-color: #e4563c !important;
+  font-size: 16px;
+  border-radius: 0px !important;
+  height: 50px;
+  font-family: "Montserrat";
+
+  color: #fff !important;
+}
+/*Sign in form section end*/
