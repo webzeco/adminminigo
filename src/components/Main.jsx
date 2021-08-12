@@ -13,7 +13,7 @@ import NotFound from './NotFound';
 import Staff from './Staff';
 import Categories from './Categories';
 import { ToastContainer, toast } from 'react-toastify';
-import { login } from '../services/authService';
+import { forgotPassword, login, resetPassword } from '../services/authService';
 import { addNewProduct, addNewProductImages, deleteProduct, getAllProducts } from '../services/productServices';
 import { getMe } from '../services/UsersService';
 import { getAllOrders } from '../services/orderServices';
@@ -23,6 +23,8 @@ import { CategoryContext } from './contexts/categoryContext';
 import Profile from './Profile';
 import Reviews from './Reviews';
 import Transaction from './Transactions';
+import ResetPassword from './ResetPassword';
+import Forgot from './Forgot';
 
 export default function Main() {
   const history = useHistory();
@@ -78,14 +80,21 @@ export default function Main() {
 
     }
   }
-
+  const forgotHandler = async (email) => {
+    const data= await  forgotPassword(email)
+     if(data.data.status==='success')
+     toast.success("Email successfully sent Please check your mail");
+    else{
+     toast.error(data.data.message);
+     history.push("/");
+    }
+   };
+   
   const signUpHandler = (user) => {
     setUser(user);
     history.push('/');
   }
-  const forgotHandler = (user) => {
-    history.push('/');
-  }
+ 
   const getAllOrderHandler = async () => {
     const { data } = await getAllOrders();
     setOrders(data.data);
@@ -178,6 +187,27 @@ export default function Main() {
     console.log({ products });
   }
 
+  const resetPasswordHandler=async (values)=>{
+    const {password,confirmPassword,token}=values;
+    console.log(values);
+    try {
+      await resetPassword({password,confirmPassword },token);
+      toast.success(" Password Reset Successfully !!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      setTimeout(() => {
+        toast.success(" Login with New Password !!", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+         history.push("/login");
+      }, 1500);
+    } catch (error) {
+      console.log(error);
+      toast.error("Invalid token !!!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+  }
   return (
     <UserContext.Provider value={{ user, loginHandler }}>
       <CategoryContext.Provider value={{ categories, deleteSubCategoryHandler, createSubCategoryHandler }}>
@@ -217,11 +247,20 @@ export default function Main() {
                 path="/login"
                 render={(props) => <Login onLogin={loginHandler} />}
               />
-              <Route
-                exact
-                path="/signUp"
-                render={(props) => <Login onLogin={loginHandler} />}
-              />
+               <Route
+                  exact
+                  path="/resetPassword/:token"
+                  render={(props) => (
+                    <ResetPassword onResetPassword={resetPasswordHandler} {...props} />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/forgot"
+                  render={(props) => (
+                    <Forgot onForgot={forgotHandler} {...props} />
+                  )}
+                />
               <Route
                 exact
                 path="/orders"
