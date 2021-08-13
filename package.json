@@ -13,6 +13,7 @@
     "bootstrap": "^5.0.2",
     "formik": "^2.2.9",
     "jwt-decode": "^3.1.2",
+    "ntcjs": "^1.1.2",
     "react": "^17.0.2",
     "react-color": "^2.19.3",
     "react-dnd": "^14.0.2",

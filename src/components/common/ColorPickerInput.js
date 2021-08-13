@@ -25,11 +25,12 @@ const ColorPickerInput = props => {
         setTags([...tags, temp])
         e.preventDefault();
     }
+  
     return (
         <>
             {
                 tags.map(
-                    (picker) => <ColorPicker id={picker.id} setText={(tag) => sendTag(tag)} />
+                    (picker) =><><ColorPicker id={picker.id} setText={(tag) => sendTag(tag)} /></> 
                 )
             }
             <button className="btn btn-warning" onClick={addColor}>Add more Color</button>
