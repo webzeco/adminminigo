@@ -191,16 +191,18 @@ class VariantImgSelect extends Component {
     super(props);
   }
   onChangeHandler = (e) => {
-    const data = this.props.variant;
-    let tagID = 0;
-    data.tags.map((tag) => {
-      if (tag.id + tag.text === e.target.id) {
-        tagID = tag.id;
-        console.log(tagID);
-      }
-    });
-    data.tags.find(({ id }) => id === tagID).img = e.target.value;
-    this.props.addData(data);
+    if (e.target.value != "None") {
+      const data = this.props.variant;
+      let tagID = 0;
+      data.tags.map((tag) => {
+        if (tag.id + tag.text === e.target.id) {
+          tagID = tag.id;
+          console.log(tagID);
+        }
+      });
+      data.tags.find(({ id }) => id === tagID).img = e.target.value;
+      this.props.addData(data);
+    }
   };
 
   render() {
@@ -214,6 +216,7 @@ class VariantImgSelect extends Component {
           id={this.props.tag.id + this.props.tag.text}
           onChange={(e) => this.onChangeHandler(e)}
         >
+          <option value="None">None</option>
           {this.props.imgList.map((img) => (
             <option value={img}>{img}</option>
           ))}
