@@ -37,7 +37,6 @@ export default function Main() {
 
   useEffect(() => {
     if (!user) {
-      // history.push('/login');
     }
     return () => {
       console.log('clean up');
@@ -45,10 +44,6 @@ export default function Main() {
   }, [user]);
 
   useEffect(() => {
-    // if (!user) {
-    // history.push('/login');
-    // }
-    // getAllCategories();
     return () => {
       console.log('clean up');
     }
@@ -89,12 +84,10 @@ export default function Main() {
      history.push("/");
     }
    };
-   
   const signUpHandler = (user) => {
     setUser(user);
     history.push('/');
   }
- 
   const getAllOrderHandler = async () => {
     const { data } = await getAllOrders();
     setOrders(data.data);

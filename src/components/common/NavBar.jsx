@@ -81,7 +81,7 @@ export default function NavBar() {
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-icon dropdown-toggle" href="#" id="messagesDropdown"
+                    <a class="nav-icon dropdown-toggle" href="/" id="messagesDropdown"
                         data-bs-toggle="dropdown">
                         <div class="position-relative">
                             {/* <i class="align-middle" data-feather="message-square"></i> */}
@@ -95,60 +95,18 @@ export default function NavBar() {
                             </div>
                         </div> */}
                         <div class="list-group">
-                            {/* <a href="#" class="list-group-item">
-                                <div class="row g-0 align-items-center">
-                                    <div class="col-2">
-                                        <img src="img/avatars/avatar-2.jpg"
-                                            class="avatar img-fluid rounded-circle" alt="William Harris" />
-                                    </div>
-                                    <div class="col-10 ps-2">
-                                        <div class="text-dark">William Harris</div>
-                                        <div class="text-muted small mt-1">Curabitur ligula sapien euismod
-                                            vitae.</div>
-                                        <div class="text-muted small mt-1">2h ago</div>
-                                    </div>
-                                </div>
-                            </a> */}
-                            {/* <a href="#" class="list-group-item">
-                                <div class="row g-0 align-items-center">
-                                    <div class="col-2">
-                                        <img src="img/avatars/avatar-4.jpg"
-                                            class="avatar img-fluid rounded-circle" alt="Christina Mason" />
-                                    </div>
-                                    <div class="col-10 ps-2">
-                                        <div class="text-dark">Christina Mason</div>
-                                        <div class="text-muted small mt-1">Pellentesque auctor neque nec urna.
-                                        </div>
-                                        <div class="text-muted small mt-1">4h ago</div>
-                                    </div>
-                                </div>
-                            </a> */}
-                            {/* <a href="#" class="list-group-item">
-                                <div class="row g-0 align-items-center">
-                                    <div class="col-2">
-                                        <img src="https://zoom.us/j/92785740031?pwd=NVdyQk5UVzFpYWcwMTM1NTlRVzhQQT09"
-                                            class="avatar img-fluid rounded-circle" alt="Sharon Lessman" />
-                                    </div>
-                                    <div class="col-10 ps-2">
-                                        <div class="text-dark">Sharon Lessman</div>
-                                        <div class="text-muted small mt-1">Aenean tellus metus, bibendum sed,
-                                            posuere ac, mattis non.</div>
-                                        <div class="text-muted small mt-1">5h ago</div>
-                                    </div>
-                                </div>
-                            </a> */}
+                           
                         </div>
                         <div class="dropdown-menu-footer">
-                            <a href="#" class="text-muted">Show all messages</a>
+                            <a href="/" class="text-muted">Show all messages</a>
                         </div>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#"
+                    <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="/"
                         data-bs-toggle="dropdown">
-                        {/* <i class="align-middle" data-feather="settings"></i> */}
                     </a>
-                    <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#"
+                    <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="/"
                         data-bs-toggle="dropdown">
                         <img src="https://zeebraline.com/img/noimg.png" class="avatar img-fluid rounded me-1"
                             alt="Charles Hall" />
