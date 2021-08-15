@@ -16,7 +16,7 @@ export default function Profile() {
 
     return (
         <div class="container rounded bg-white mt-5 mb-5">
-            <div className="display-5">Profile</div>
+            <div className="display-6 px-3 fw-bold mt-3">Profile</div>
     {user&&(
         <div class="row">
         <div class="col-md-3 border-right">

@@ -25,7 +25,7 @@ import Reviews from './Reviews';
 import Transaction from './Transactions';
 import ResetPassword from './ResetPassword';
 import Forgot from './Forgot';
-
+import Baskets from './Baskets';
 export default function Main() {
   const history = useHistory();
   const [user, setUser] = useState();
@@ -223,6 +223,11 @@ export default function Main() {
                 exact
                 path="/addProduct"
                 render={(props) => <AddProduct addProduct={addProductHandler} />}
+              />
+              <Route
+                exact
+                path="/basket"
+                render={(props) => <Baskets />}
               />
               <Route
                 exact

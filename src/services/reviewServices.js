@@ -11,6 +11,7 @@ export function updateReview(favorite,id) {
         favorite
 });
 }
+
 export function createSubCategory(data){
     return http.patch(`${url}/addSubCategory/${data.parent}`, {
         subCategory:data.name.trim(),
@@ -18,25 +19,7 @@ export function createSubCategory(data){
 });
 };
 
-
-export function getUserStats(id) {
-    return http.get(`${url}/stats/${id}`);
-}
-
-export function createNewTransaction(trans) {
-     const data={
-    amount:parseInt(trans.amount),
-    name:trans.name,
-    method:trans.method
-    }
-    return http.post(url,data);
-}
 const AllServices = {
-    getAllReviews,
-    // confirmTransaction,
-    // deleteSubCategory,
-    // createNewTransaction,
-    // getUserStats,
-    // createSubCategory
+    getAllReviews
 }
 export default AllServices;
