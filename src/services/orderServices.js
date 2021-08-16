@@ -8,34 +8,9 @@ export function confirmTransaction(id) {
         status:true
 });
 }
-export function addBalance(id,method,balance){
-    return http.patch(`${url}/addBalance/${id}`, {
-        method,
-        balance
-});
-};
 
-
-export function getUserTransactions(id) {
-    return http.get(`${url}/${id}`);
-}
-export function getUserStats(id) {
-    return http.get(`${url}/stats/${id}`);
-}
-export function createNewTransaction(trans) {
-     const data={
-    amount:parseInt(trans.amount),
-    name:trans.name,
-    method:trans.method
-    }
-    return http.post(url,data);
-}
 const AllServices = {
     getAllOrders,
     confirmTransaction,
-    getUserTransactions,
-    createNewTransaction,
-    getUserStats,
-    addBalance
 }
 export default AllServices;

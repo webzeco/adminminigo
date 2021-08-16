@@ -6,6 +6,9 @@ export function getAllProducts() {
 export function deleteProduct(id) {
     return http.delete(`${url}/delete/${id}`);
   }
+  export function addNewBasket(data) {
+    return http.post(`${url}/addBasket`,data);
+}
 export function confirmTransaction(id) {
     return http.patch(`${url}/${id}`, {
         status:true

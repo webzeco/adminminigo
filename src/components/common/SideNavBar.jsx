@@ -89,12 +89,18 @@ export default function SideNavBar() {
                                         className="align-middle">Reviews</span>
                                 </Link>
                             </li>
-
                             <li className="sidebar-item">
+                                <Link className="sidebar-link" to="/basket">
+                                    <i className="align-middle" data-feather="align-justify"></i> <span
+                                        className="align-middle">Baskets</span>
+                                </Link>
+                            </li>
+
+                            {/* <li className="sidebar-item">
                                 <Link className="sidebar-link" to="/profile">
                                     <i className="align-middle" data-feather="user"></i> <span className="align-middle">Profile</span>
                                 </Link>
-                            </li>
+                            </li> */}
 
                             {/* <li className="sidebar-item">
                                 <a className="sidebar-link" href="/login">

@@ -25,7 +25,7 @@ import Reviews from './Reviews';
 import Transaction from './Transactions';
 import ResetPassword from './ResetPassword';
 import Forgot from './Forgot';
-
+import Baskets from './Baskets';
 export default function Main() {
   const history = useHistory();
   const [user, setUser] = useState();
@@ -37,7 +37,6 @@ export default function Main() {
 
   useEffect(() => {
     if (!user) {
-      // history.push('/login');
     }
     return () => {
       console.log('clean up');
@@ -45,10 +44,6 @@ export default function Main() {
   }, [user]);
 
   useEffect(() => {
-    // if (!user) {
-    // history.push('/login');
-    // }
-    // getAllCategories();
     return () => {
       console.log('clean up');
     }
@@ -89,12 +84,10 @@ export default function Main() {
      history.push("/");
     }
    };
-   
   const signUpHandler = (user) => {
     setUser(user);
     history.push('/');
   }
- 
   const getAllOrderHandler = async () => {
     const { data } = await getAllOrders();
     setOrders(data.data);
@@ -230,6 +223,11 @@ export default function Main() {
                 exact
                 path="/addProduct"
                 render={(props) => <AddProduct addProduct={addProductHandler} />}
+              />
+              <Route
+                exact
+                path="/basket"
+                render={(props) => <Baskets />}
               />
               <Route
                 exact
