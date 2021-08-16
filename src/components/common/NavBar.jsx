@@ -1,8 +1,17 @@
 import React, { useContext } from 'react'
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { UserContext } from '../contexts/UserContext';
 
 export default function NavBar() {
     const { user } = useContext(UserContext);
+    const logoutHandler=()=>{
+        localStorage.clear();
+        window.location='/';
+        toast.success("Your are successfully logout", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+    }
     return (
         <div  style={{display:user?'contents':'none'}}>
         <nav class="navbar navbar-expand navbar-light navbar-bg">
@@ -108,11 +117,19 @@ export default function NavBar() {
                         <span class="text-dark">{user?.name}</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end">
-                        <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1"
-                            data-feather="user"></i> Profile</a>
+                        <Link class="dropdown-item" to="/profile">
+                            <i class="align-middle me-1"
+                            data-feather="user"></i> Profile</Link>
                        
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Log out</a>
+                        <Link class="dropdown-item" to="/updatePassword">
+                        <i class="fas fa-lock m-2"></i>change Password</Link>
+                        <div class="dropdown-divider"></div>
+
+                        <a class="dropdown-item" onClick={()=>logoutHandler('')} href="/login">
+                        <i class="fas fa-sign-out-alt m-2"></i>
+                            Log out
+                            </a>
                     </div>
                 </li>
             </ul>

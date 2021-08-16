@@ -9,13 +9,11 @@ export function addUser(user) {
     passwordConfirm:user.passwordConfirm
     });
 }
-export function getAllUsers(){
-    return http.get(url);
+export function getStaff(){
+    return http.get(`${url}/staff`);
 }
 export function deleteUser(name){
-    return http.patch(`${url}/delete`, {
-        name
-    });
+    return http.patch(`${url}/delete/${name}`);
 }
 export  function  getMe() {
     return  http.get(`${url}/me`);
@@ -25,14 +23,11 @@ export  function  updateMe(data) {
     return  http.patch(`${url}/updateMe`,data);
 }
 
-export  function  updatePassword(data) {
-    return  http.patch(`${url}/updateMyPassword`,data);
-}
+
 const AllServices = {
     addUser,
-    getAllUsers,
-    getMe:getMe,
+    getStaff,
+getMe,
     updateMe,
-    updatePassword
 }
 export default AllServices;

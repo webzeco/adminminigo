@@ -26,6 +26,9 @@ import Transaction from './Transactions';
 import ResetPassword from './ResetPassword';
 import Forgot from './Forgot';
 import Baskets from './Baskets';
+import UpdatePassword from './UpdatePassword';
+import AddUser from './AddUser';
+import Users from './Users';
 export default function Main() {
   const history = useHistory();
   const [user, setUser] = useState();
@@ -259,6 +262,26 @@ export default function Main() {
                     <Forgot onForgot={forgotHandler} {...props} />
                   )}
                 />
+                 <Route
+                  exact
+                  path="/updatePassword"
+                  render={(props) => (
+                    <UpdatePassword  {...props} />
+                  )}
+                />
+                 <Route
+                  exact
+                  path="/users"
+                  render={(props) => (
+                    <Users  {...props} />
+                  )}
+                /> <Route
+                exact
+                path="/addUser"
+                render={(props) => (
+                  <AddUser  {...props} />
+                )}
+              />
               <Route
                 exact
                 path="/orders"

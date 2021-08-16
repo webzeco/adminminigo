@@ -30,6 +30,15 @@ export const resetPassword=(data,token)=> {
         }
     );
 };
+export const updatePassword=(data)=> {
+    return http.patch(`${url}/updatePassword`,
+        {
+            passwordCurrent:data.currentPassword,
+            password: data.newPassword,
+            passwordConfirm:data.confirmNewPassword
+        }
+    );
+};
 export const isLogin=()=> {
     const token = localStorage.getItem('jwt')
     if (token) {
