@@ -91,8 +91,17 @@ export default function SideNavBar() {
                             </li>
                             <li className="sidebar-item">
                                 <Link className="sidebar-link" to="/basket">
-                                    <i className="align-middle" data-feather="align-justify"></i> <span
+                                    {/* <i className="align-middle" data-feather="align-justify"></i> */}
+                                    <i class="fas fa-shopping-basket"></i>
+                                     <span
                                         className="align-middle">Baskets</span>
+                                </Link>
+                            </li>
+                            <li className="sidebar-item">
+                                <Link className="sidebar-link" to="/users">
+                                    {/* <i className="align-middle" data-feather="align-justify"></i> */}
+                                    <i class="fas fa-users"></i>                                     <span
+                                        className="align-middle">Users</span>
                                 </Link>
                             </li>
 
@@ -107,6 +116,7 @@ export default function SideNavBar() {
                                     <i className="align-middle" data-feather="log-in"></i> <span className="align-middle">Sign In</span>
                                 </a>
                             </li> */}
+
 
                             <li className="sidebar-item" onClick={()=>logoutHandler('')}>
                                 <Link className="sidebar-link" href="/">
