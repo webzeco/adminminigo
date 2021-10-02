@@ -21,8 +21,6 @@ const AddProduct = ({ addProduct }) => {
   const [children, setChildren] = useState([]);
   const [child, setChild] = useState("select child category");
 
-  
-
   const handleParentChange = (e) => {
     setParent(e.target.value);
     console.log(categories.find((cate) => cate.category === e.target.value));
@@ -39,17 +37,15 @@ const AddProduct = ({ addProduct }) => {
       title: "",
       price: 0,
       category: "",
-      compareAtPrice: 0.0,
-      costPerItem: 0.0,
+      costPerItem: 0.54455,
       chargeTax: false,
       stockKeepingUnit: "",
       barcode: "",
       trackQuantity: false,
-      sellOutofStock: false,
+      shipping: "",
       availableQuantity: 0,
       physicalProduct: false,
       weight: 0,
-      country: "",
       variants: {},
     },
     validationSchema: Yup.object({
@@ -78,6 +74,8 @@ const AddProduct = ({ addProduct }) => {
     },
   });
 
+
+
   return (
     <div className="container px-3">
       <div className="display-6 px-3 fw-bold mt-3 ">Add Product</div>
@@ -96,13 +94,6 @@ const AddProduct = ({ addProduct }) => {
           <div>{formik.errors.title}</div>
         ) : null}
         <div class="mb-4  text-primary">
-          {/* <input type='select'  component="select" name="parent" value={parent}
-                       className={"form-control"} onChange={handleParentChange}>
-                        <option value={'select parent'}>Select Parent</option>
-                        {categories?.map(cate => {
-                          return <option value={cate.category}>{cate.category}</option>
-                        })}
-                      </input> */}
           <div className="select-container w-50">
             <label className="title pb-2" htmlFor="price">
               Category
@@ -157,7 +148,7 @@ const AddProduct = ({ addProduct }) => {
           setImages={(images) => setImages(images)}
         />
         {/* .............................................. */}
-        <div className="h4">Pricing</div>
+        {/* <div className="h4">Pricing</div> */}
         <label className="title pb-2" htmlFor="price">
           Price
         </label>
@@ -173,7 +164,7 @@ const AddProduct = ({ addProduct }) => {
         ) : null}
         {/* .............................................. */}
 
-        <label className="title pb-2" htmlFor="compareAtPrice">
+        {/* <label className="title pb-2" htmlFor="compareAtPrice">
           Compare at price
         </label>
         <input
@@ -185,10 +176,10 @@ const AddProduct = ({ addProduct }) => {
         />
         {formik.touched.compareAtPrice && formik.errors.compareAtPrice ? (
           <div>{formik.errors.compareAtPrice}</div>
-        ) : null}
+        ) : null} */}
 
         {/* .............................................. */}
-        <label className="title pb-2" htmlFor="costPerItem">
+        {/* <label className="title pb-2" htmlFor="costPerItem">
           Cost per item
         </label>
         <input
@@ -200,9 +191,9 @@ const AddProduct = ({ addProduct }) => {
         />
         {formik.touched.costPerItem && formik.errors.costPerItem ? (
           <div>{formik.errors.costPerItem}</div>
-        ) : null}
+        ) : null} */}
 
-        <label className="title pb-2 px-2" htmlFor="chargeTax">
+        {/* <label className="title pb-2 px-2" htmlFor="chargeTax">
           Charge Tax
         </label>
         <input
@@ -214,10 +205,10 @@ const AddProduct = ({ addProduct }) => {
         />
         {formik.touched.chargeTax && formik.errors.chargeTax ? (
           <div>{formik.errors.chargeTax}</div>
-        ) : null}
+        ) : null} */}
 
         {/* .............................................. */}
-        <div className="h4">Inventory</div>
+        {/* <div className="h4">Inventory</div>
         <label className="title pb-2" htmlFor="stockKeepingUnit">
           Stock Keeping Unit(SKU)
         </label>
@@ -244,11 +235,11 @@ const AddProduct = ({ addProduct }) => {
         />
         {formik.touched.barcode && formik.errors.barcode ? (
           <div>{formik.errors.barcode}</div>
-        ) : null}
+        ) : null} */}
 
-        <br />
+        {/* <br /> */}
         {/* .............................................. */}
-        <label className="title pb-2 px-2" htmlFor="trackQuantity">
+        {/* <label className="title pb-2 px-2" htmlFor="trackQuantity">
           Track Quantity
         </label>
         <input
@@ -261,25 +252,25 @@ const AddProduct = ({ addProduct }) => {
         {formik.touched.trackQuantity && formik.errors.trackQuantity ? (
           <div>{formik.errors.trackQuantity}</div>
         ) : null}
-        <br />
+        <br /> */}
         {/* .............................................. */}
 
-        <label className="title p-2" htmlFor="sellOutofStock">
-          Sell Out of Stock
+        <label className="title p-2" htmlFor="shipping">
+          Shipping
         </label>
         <input
-          className="form-check-input mb-1"
-          id="sellOutofStock"
-          name="sellOutofStock"
-          type="checkbox"
-          {...formik.getFieldProps("sellOutofStock")}
+          className="form-control mb-1 w-50"
+          id="shipping"
+          name="shipping"
+          type="text"
+          {...formik.getFieldProps("shipping")}
         />
-        {formik.touched.sellOutofStock && formik.errors.sellOutofStock ? (
-          <div>{formik.errors.sellOutofStock}</div>
+        {formik.touched.shipping && formik.errors.shipping ? (
+          <div>{formik.errors.shipping}</div>
         ) : null}
         <br />
         {/* .............................................. */}
-        <label className="title pb-2" htmlFor="availableQuantity">
+        {/* <label className="title pb-2" htmlFor="availableQuantity">
           Available Quantity
         </label>
         <input
@@ -291,11 +282,10 @@ const AddProduct = ({ addProduct }) => {
         />
         {formik.touched.availableQuantity && formik.errors.availableQuantity ? (
           <div>{formik.errors.availableQuantity}</div>
-        ) : null}
+        ) : null} */}
 
-        <div className="h4">Shipping</div>
-
-        <label className="title p-2" htmlFor="physicalProduct">
+        {/* <div className="h4">Shipping</div> */}
+        <label className="title mx-1" htmlFor="physicalProduct">
           Physical Product
         </label>
         <input
@@ -315,7 +305,7 @@ const AddProduct = ({ addProduct }) => {
           Weight
         </label>
         <input
-          className="form-control w-50"
+          className="form-control w-50 mb-3"
           id="weight"
           name="weight"
           type="numbwe"
@@ -325,25 +315,12 @@ const AddProduct = ({ addProduct }) => {
           <div>{formik.errors.weight}</div>
         ) : null}
 
-        <label className="title pb-2" htmlFor="country">
-          Country
-        </label>
-        <input
-          className="form-control mb-4 w-50"
-          id="country"
-          name="country"
-          type="textarea"
-          {...formik.getFieldProps("country")}
-        />
-        {formik.touched.country && formik.errors.country ? (
-          <div>{formik.errors.country}</div>
-        ) : null}
         {/* .............................................. */}
         <Variants
           sendVariantsData={(variantsData) => setVariantsData(variantsData)}
           imgList={imgList}
         />
-        <button className="btn btn-primary mb-3" type="submit">
+        <button className="btn btn-primary my-3" type="submit">
           Submit
         </button>
       </form>
@@ -376,7 +353,7 @@ export default AddProduct;
 //             stockKeepingUnit: '',
 //             barcode: '',
 //             trackQuantity: false,
-//             sellOutofStock: false,
+//             shipping: false,
 //             availableQuantity: 0,
 //             physicalProduct: false,
 //             weight: 0,
@@ -552,16 +529,16 @@ export default AddProduct;
 //                 <br />
 //                 {/* .............................................. */}
 
-//                 <label className="title p-2" htmlFor="sellOutofStock">Sell Out of Stock</label>
+//                 <label className="title p-2" htmlFor="shipping">Sell Out of Stock</label>
 //                 <input className="form-check-input mb-1"
-//                     id='sellOutofStock'
-//                     name='sellOutofStock'
+//                     id='shipping'
+//                     name='shipping'
 //                     type='checkbox'
-//                     {...formik.getFieldProps('sellOutofStock')}
+//                     {...formik.getFieldProps('shipping')}
 //                 />
 //                 {
-//                     formik.touched.sellOutofStock && formik.errors.sellOutofStock ?
-//                         (<div>{formik.errors.sellOutofStock}</div>) : null
+//                     formik.touched.shipping && formik.errors.shipping ?
+//                         (<div>{formik.errors.shipping}</div>) : null
 //                 }
 //                 <br />
 //                 {/* .............................................. */}

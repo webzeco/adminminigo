@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import ReactStars from "react-rating-stars-component";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { deleteReview, getAllReviews, updateReview } from '../services/reviewServices';
 import { deleteUser, getStaff } from '../services/UsersService';
-import { getStaffSelector, loadStaff } from '../storemini/reducers/staff';
+import { getAllCustomersSelector, loadCustomers } from '../storemini/reducers/customers';
 
-export default function Staff() {
+export default function Customers() {
+    const [favorite, setFavorite] = useState([]);
     const dispatch = useDispatch();
-    const staff = useSelector(getStaffSelector);
+    const staff = useSelector(getAllCustomersSelector);
+
+    const getStaffHandler = async () => {
+
+    }
 
     const onDeleteHandler = async (user) => {
         console.log({ user });
@@ -25,22 +31,19 @@ export default function Staff() {
     }
 
     useEffect(() => {
-        dispatch(loadStaff());
+        dispatch(loadCustomers());
+        //    alert( JSON.stringify(staff));
     }, [])
     return (
         <div>
             <div className="container">
-                <div className="display-6 px-3 fw-bold mt-3 ">ALL USERS</div>
+                <div className="display-6 px-3 fw-bold mt-3 ">All Customers</div>
             </div>
-            <button class="btn text-center p-0"><Link class="btn btn-secondary 
-             p-1" to='/addUser'>Add New User</Link></button>
             <div class="table-responsive">
                 <table className="table mx-2 mt-3">
-
                     <thead>
                         <tr className="bg-info">
                             <th scope="col">#</th>
-                            {/* <th scope="col">User</th> */}
                             <th scope="col">Username</th>
                             <th scope="col">Email</th>
                             <th scope="col">CreatedAt</th>
@@ -53,7 +56,6 @@ export default function Staff() {
                         return (
                             <tr>
                                 <td className="px-2" style={{ width: "5%" }}>{index + 1}</td>
-                                {/* <td style={{width:"25%"}}>{user.profile}</td> */}
                                 <td style={{ width: "25%" }}>{user.name}</td>
                                 <td style={{ width: "25%" }} >{user.email}</td>
                                 <td style={{ width: "10%" }}>{user.createdAt.substring(0, 10)}</td>

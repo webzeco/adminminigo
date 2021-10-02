@@ -48,8 +48,8 @@ export default function Forgot({onForgot}) {
                 SEND RESET EMAIL
               </button>
             </div>
-            <Link className="creat_look text-center fw-bold mb-4" to="/signup">
-              <h5 className=" mb-2 mt-5 creat_look fw-bold"> CREAT ACCOUNT</h5>
+            <Link className="creat_look text-center fw-bold mb-4" to="/">
+              <h5 className=" mb-2 mt-5 creat_look fw-bold"> Go Back</h5>
             </Link>
           </Form>
         )}

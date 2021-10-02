@@ -43,6 +43,7 @@ export default function ResetPassword({ onResetPassword ,match}) {
             <div className="mb-4">
               <Field
                 name="confirmPassword"
+                type="password"
                 className="form-control"
                 placeholder="confirmPassword"
               />

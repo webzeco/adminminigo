@@ -13,12 +13,17 @@ export function confirmTransaction(id) {
     return http.patch(`${url}/${id}`, {
         status:true
 });
-}
-export function addBalance(id,method,balance){
-    return http.patch(`${url}/addBalance/${id}`, {
-        method,
-        balance
-});
+};
+export function changeBestSellerStatus(status,id) {
+    return http.patch(`${url}/changeBestSellerStatus/${id}`, {
+        status
+})};
+export function changeProductStatus(status,id) {
+    return http.patch(`${url}/changeProductStatus/${id}`, {
+        status
+})};
+export function getProduct(id){
+    return http.get(`${url}/${id}`);
 };
 
 
@@ -40,6 +45,6 @@ const AllServices = {
     getUserTransactions,
     addNewProduct,
     getUserStats,
-    addBalance
+    getProduct
 }
 export default AllServices;

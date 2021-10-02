@@ -46,7 +46,7 @@ console.log(err);
     getAllBasketsHandler();
 }
 const onselectHandler = async (e, id) => {
-    const preBaskets=baskets;
+    const preBaskets=[...baskets];
     console.log(e.target.checked, id);
     try {
        const {data}= await  updateBasket(e.target.checked,id);

@@ -1,16 +1,42 @@
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import './styles/login.css';
 import { updatePassword } from "../services/authService";
 import { toast } from "react-toastify";
-const userSchema = Yup.object().shape({
-  currentPassword: Yup.string().required("Required").label("currentPassword"),
-  newPassword: Yup.string().required("Required").label("NewPassword"),
-  confirmNewPassword: Yup.string().required("Required").label("ConfirmNewPassword"),
-});
+import { addUser } from "../services/UsersService";
+
 export default function AddUser() {
+  const history=useHistory();
+
+  const userSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(6)
+      .max(50)
+      .required("Required").label('Username'),
+    password: Yup.string()
+      .min(6)
+      .max(50
+        )
+      .required("Required").label('Password'),
+      confirmPassword: Yup.string()
+      .min(6)
+      .max(50)
+      .required("Required").label('PasswordConfirm'),
+    email: Yup.string().email().required("Required").label('Email'),
+    contactNo: Yup.string().required("Required").label('Contact number'),
+  
+  });
+  const addUserHandler=async(values)=>{
+    try {
+      await addUser(values);
+      history.push('/users');
+toast.success("User Successfully added");
+    } catch (error) {
+      toast.error('Operation Failed !!!');
+    }
+  }
   const updatePasswordHandler=async (values)=>{
     try {
         const {data}=await updatePassword(values);
@@ -27,12 +53,13 @@ export default function AddUser() {
         initialValues={{
           name: "",
           email: "",
+          contactNo:"",
           password:"",
           confirmPassword:""
         }}
         validationSchema={userSchema}
         onSubmit={(values) => {
-          updatePasswordHandler(values);
+          addUserHandler(values);
         }}
       >
         {({ errors, touched }) => (
@@ -49,6 +76,19 @@ export default function AddUser() {
                 </div>
               ) : null}
             </div>
+            <div class="mb-4">
+              <Field
+                name="contactNo"
+                className="form-control"
+                placeholder="contactNo"
+              />
+              {errors.contactNo && touched.contactNo ? (
+                <div class="alert alert-danger  p-2" role="alert">
+                  {errors.contactNo}
+                </div>
+              ) : null}
+            </div>
+
             <div class="mb-4">
               <Field
                 name="email"
@@ -76,7 +116,7 @@ export default function AddUser() {
               ) : null}
             </div> <div class="mb-4">
               <Field
-                name="confirmNewPassword"
+                name="confirmPassword"
                 type="password"
                 className="form-control"
                 placeholder="confirmPassword"
