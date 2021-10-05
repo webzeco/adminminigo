@@ -1,6 +1,7 @@
 {
   "name": "adminminigoonline",
   "version": "0.1.0",
+  "homepage": "http://admin.minigo.online",
   "private": true,
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^28.0.0",
