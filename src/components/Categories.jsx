@@ -11,11 +11,11 @@ const loginSchema = Yup.object().shape({
 });
 export default function Categories() {
   // console.log(categories);
-  const {categories, deleteSubCategoryHandler, createSubCategoryHandler} = useContext(CategoryContext)
+  const { categories, deleteSubCategoryHandler, createSubCategoryHandler } = useContext(CategoryContext)
   const [parent, setParent] = useState('select parent');
   // const [main, setMain] = useState(false);
   // const [Count, setCount] = useState(0);
-  let count=0;
+  let count = 0;
   const handleChange = (e) => {
     setParent(e.target.value);
     console.log(e.target.value);
@@ -28,13 +28,13 @@ export default function Categories() {
 
   return (
     <div>
-      <div class="container-fluid pb-5">
+      <div class="container-fluid pb-2">
         <div class="row">
           <div class="col-lg-9 .col-md-9">
             <div class="display-6 px-3 fw-bold mt-3">Categories</div>
             <div class="display-7 px-3">Add,edit or delete a category</div>
           </div>
-          <div class="col-lg-3 .col-md-12 mt-4">
+          {/* <div class="col-lg-3 .col-md-12 mt-4">
             <div class="form-outline ">
               <input
                 type="search"
@@ -44,10 +44,10 @@ export default function Categories() {
                 aria-label="Search"
               />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
-      <div class="container-fluid bg_color pt-3  rounded h-100">
+      <div class="container-fluid bg_color  rounded h-100">
         <div class="card w-100 rounded">
           <div class="row d-flex justify-content-around  px-3">
             <div class="col-lg-3 col-md-3 mt-3 pb-5">
@@ -102,8 +102,8 @@ export default function Categories() {
                       </div>
                     </div> */}
                     <div class="mb-4  text-primary">
-                      <Field type='select'  component="select" name="parent" value={parent}
-                       className={"form-control"} onChange={handleChange}>
+                      <Field type='select' component="select" name="parent" value={parent}
+                        className={"form-control"} onChange={handleChange}>
                         <option value={'select parent'}>Select Parent</option>
                         {categories.map(cate => {
                           return <option value={cate.category}>{cate.category}</option>
@@ -123,8 +123,8 @@ export default function Categories() {
                   </Form>
                 )}
               </Formik>
-              </div>
-              <div class="col-lg-9 col-md-12 p-3 mt-2 ">
+            </div>
+            <div class="col-lg-9 col-md-12 p-3 mt-2 ">
               <div class="table-responsive">
                 <table class="table">
                   <thead class="bg-info text-white ">
@@ -138,10 +138,10 @@ export default function Categories() {
                     </tr>
                   </thead>
                   <tbody>
-                  {categories?.map((cate )=> {
-                   return cate?.subCategories?.map((subCate )=> {
-                     count+=1;
-                          return <tr key={count}>
+                    {categories?.map((cate) => {
+                      return cate?.subCategories?.map((subCate) => {
+                        count += 1;
+                        return <tr key={count}>
                           <td>
                             <div class="form-check">
                               <label class="form-check-label" for="flexCheckDefault">
@@ -154,28 +154,28 @@ export default function Categories() {
                           <td>{cate.category}</td>
                           <td>
                             {" "}
-                              <button
-                                class="btn btn-light text-light bg-danger  border"
-                                type="button"
-                                aria-expanded="false"
-                                onClick={()=>deleteSubCategoryHandler({category:cate.category,subCategory:subCate.name})}
-                              >
-                                Delete
-                              </button>
-                              
+                            <button
+                              class="btn btn-light text-light bg-danger  border"
+                              type="button"
+                              aria-expanded="false"
+                              onClick={() => deleteSubCategoryHandler({ category: cate.category, subCategory: subCate.name })}
+                            >
+                              Delete
+                            </button>
+
                           </td>
                         </tr>
-                         } );
-                        })}
-                    
+                      });
+                    })}
+
                   </tbody>
                 </table>
-                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    
+    </div>
+
   );
 }

@@ -7,23 +7,26 @@ export default class Variants extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hasVariant: true,
+      hasVariant: false,
       variantsData: [
         {
           id: 1,
           selectedOption: "Title",
-          tags: [],
+          tags: [
+            // {id:1,text:"",img:"",qty:""}
+          ],
         },
       ],
     };
     this.handleChange = this.handleChange.bind(this);
     this.addData = this.addData.bind(this);
   }
-  handleChange = (e) => {
-    this.setState({
-      hasVariant: !this.state.hasVariant,
-    });
-  };
+  addData(data) {
+    let targetIndex =this.state.variantsData.findIndex(item => item.id === data.id);
+    let variantsData = this.state.variantsData;
+    variantsData[targetIndex] = data;
+    this.setState({ variantsData });
+  }
   addOption = () => {
     const dataItem = {
       id: this.state.variantsData.length + 1,
@@ -32,17 +35,16 @@ export default class Variants extends Component {
     };
     this.setState({ variantsData: [...this.state.variantsData, dataItem] });
   };
-  addData(data) {
-    let targetIndex = 0;
-    this.state.variantsData.map((item, index) => {
-      if (item.id === data.id) {
-        targetIndex = index;
-      }
+  handleChange = (e) => {
+    this.setState({
+      hasVariant: !this.state.hasVariant,
     });
-    let variantsData = this.state.variantsData;
-    variantsData[targetIndex] = data;
-    this.setState({ variantsData });
+  };
+ 
+  componentDidMount(){
+    window.scroll(0,0);
   }
+
   render() {
     this.props.sendVariantsData(this.state.variantsData);
     return (
@@ -81,9 +83,7 @@ export default class Variants extends Component {
 }
 
 class VariantsDataComponent extends Component {
-  constructor(props) {
-    super(props);
-  }
+  
   render() {
     return (
       <div >
@@ -119,11 +119,11 @@ class OptionComponent extends Component {
       selectedOption: this.props.selectedOption,
       tags: [],
     };
-  }
+  };
+
   onChangeHandler = (e) => {
     this.setState({ selectedOption: e.target.value });
   };
-
   saveData = (tags) => {
     this.setState({ tags: tags }, () => {
       const data = {};
@@ -166,7 +166,7 @@ class VariantsPreview extends Component {
     return (
       <>
         <h3 className="fw-bold mt-4 mb-2">Variants Preview</h3>
-        <div className="container bg-secondary w-100 mb-3 p-3">
+        <div className="container bg-secondary  w-100 mb-3 p-3">
           {this.props.data.map((variant) =>
             variant.tags.map((varObject) => {
               return (
@@ -187,9 +187,7 @@ class VariantsPreview extends Component {
 }
 
 class VariantImgSelect extends Component {
-  constructor(props) {
-    super(props);
-  }
+
   onChangeHandler = (e) => {
     if (e.target.value != "None") {
       const data = this.props.variant;
@@ -203,13 +201,29 @@ class VariantImgSelect extends Component {
       data.tags.find(({ id }) => id === tagID).img = e.target.value;
       this.props.addData(data);
     }
-  };
+};
+onQuantityChangeHandler = (e) => {
+  if (e.target.value != "None") {
+    const data = this.props.variant;
+    let tagID = 0;
+    data.tags.map((tag) => {
+      if (tag.id + tag.text === e.target.id) {
+        tagID = tag.id;
+        console.log(tagID);
+      }
+    });
+    data.tags.find(({ id }) => id === tagID).qty = e.target.value*1;
+    this.props.addData(data);
+  }
+};
 
   render() {
     return (
       <>
+      {/* {"".startsWith} */}
         <h4>
-          {this.props.tag.text ? ntcjs.name(this.props.tag.text)[1] : <></>}
+          {/* {console.log({tag:this.props.tag?.text?.startsWith("#")})} */}
+          {this.props.tag?.text?.startsWith("#") ? ntcjs.name(this.props.tag.text)[1] : this.props.tag?.text}
         </h4>
         <select
           name="variantImgSelect"
@@ -221,6 +235,12 @@ class VariantImgSelect extends Component {
             <option value={img}>{img}</option>
           ))}
         </select>
+        <div class="form-outline w-25 my-2">
+  <input type="number" 
+            id={this.props.tag.id + this.props.tag.text}
+
+  placeholder='Quantity' min={0}  onChange={this.onQuantityChangeHandler} class="form-control" />
+</div>
       </>
     );
   }

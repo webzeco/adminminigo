@@ -1,26 +1,20 @@
 import { Field, Form, Formik } from 'formik';
 import React, { useContext, useEffect, useState } from 'react'
 import * as Yup from "yup";
-import { UserContext } from './contexts/UserContext';
+import { getUserSelector, loadUser, updateMe } from '../storemini/reducers/user';
 
+import { useSelector } from "react-redux";
+import { useDispatch } from 'react-redux';
 export default function Profile() {
-    const { user } = useContext(UserContext);
-    const [me, setMe] = useState({})
+    const me = useSelector(getUserSelector);
+    const dispatch = useDispatch();
     const profileSchema = Yup.object().shape({
         contactNo: Yup.string().required("Required").label("Contact Number"),
         province: Yup.string().required("Required").label("Province"),
         city: Yup.string().required("Required").label("City"),
         address: Yup.string().required("Required").label("Address"),
-      });
-    const getMe = () => {
-        setMe(user.data);
-    }
-    useEffect(() => {
-        getMe();
-        return () => {
-            console.log("Profile clean up");
-        }
-    }, [])
+    });
+
     return (
         <div class="container rounded bg-white mt-5 mb-5">
             <div className="display-6 px-3 fw-bold mt-3">Profile</div>
@@ -33,12 +27,13 @@ export default function Profile() {
                 }}
                 validationSchema={profileSchema}
                 onSubmit={(values) => {
-                      console.log(values);
+                    // console.log(values);
+                    dispatch(updateMe(values));
                 }}
             >
                 {({ errors, touched }) => (
                     <Form>
-                        {user && (
+                        {me && (
                             <div class="row">
                                 <div class="col-md-3 border-right">
                                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
@@ -60,15 +55,15 @@ export default function Profile() {
                                             <h4 class="text-right">Profile Settings</h4>
                                         </div>
                                         <div class="row mt-2">
-                                            <div class="col-md-12"><label class="labels">User Name</label><input readOnly type="text" class="form-control" placeholder="Enter User Name" value={me.name} /></div>
+                                            <div class="col-md-12"><label class="labels">User Name</label><input readOnly type="text" class="form-control" value={me.name} /></div>
                                         </div>
                                         <div class="row mt-3">
                                             <div class="col-md-12"><label class="labels">Mobile Number</label>
-                                            <div class="mb-4 ">
+                                                <div class="mb-4 ">
                                                     <Field
                                                         name="contactNo"
                                                         className="form-control"
-                                                        placeholder="Contact Number"
+                                                        placeholder={me.contactNo}
                                                     />
                                                     {errors.contactNo && touched.contactNo ? (
                                                         <div class="alert alert-danger  p-2" role="alert">
@@ -83,49 +78,52 @@ export default function Profile() {
                                 <div class="col-md-5">
                                     <div class="p-3 py-5">
                                         <div class="col-md-12"><label class="labels">Province</label>
-                                        <div class="mb-4 ">
-                                                    <Field
-                                                        name="province"
-                                                        className="form-control"
-                                                        placeholder="Province"
-                                                    />
-                                                    {errors.province && touched.province ? (
-                                                        <div class="alert alert-danger  p-2" role="alert">
-                                                            {errors.province}
-                                                        </div>
-                                                    ) : null}
-                                                </div>
+                                            <div class="mb-4 ">
+                                                <Field
+                                                    name="province"
+                                                    className="form-control"
+                                                    placeholder={me.province}
+
+                                                />
+                                                {errors.province && touched.province ? (
+                                                    <div class="alert alert-danger  p-2" role="alert">
+                                                        {errors.province}
+                                                    </div>
+                                                ) : null}
+                                            </div>
                                         </div>
                                         <div class="col-md-12"><label class="labels">City</label>
-                                        <div class="mb-4 ">
-                                                    <Field
-                                                        name="city"
-                                                        className="form-control"
-                                                        placeholder="City"
-                                                    />
-                                                    {errors.city && touched.city ? (
-                                                        <div class="alert alert-danger  p-2" role="alert">
-                                                            {errors.city}
-                                                        </div>
-                                                    ) : null}
-                                                </div>
+                                            <div class="mb-4 ">
+                                                <Field
+                                                    name="city"
+                                                    className="form-control"
+                                                    placeholder={me.city}
+
+                                                />
+                                                {errors.city && touched.city ? (
+                                                    <div class="alert alert-danger  p-2" role="alert">
+                                                        {errors.city}
+                                                    </div>
+                                                ) : null}
+                                            </div>
                                         </div>
                                         <div class="col-md-12"><label class="labels">Area</label>
-                                        <div class="mb-4 ">
-                                                    <Field
-                                                        name="address"
-                                                        className="form-control"
-                                                        placeholder="Address"
-                                                    />
-                                                    {errors.address && touched.address ? (
-                                                        <div class="alert alert-danger  p-2" role="alert">
-                                                            {errors.address}
-                                                        </div>
-                                                    ) : null}
-                                                </div>
+                                            <div class="mb-4 ">
+                                                <Field
+                                                    name="address"
+                                                    className="form-control"
+                                                    placeholder={me.address}
+
+                                                />
+                                                {errors.address && touched.address ? (
+                                                    <div class="alert alert-danger  p-2" role="alert">
+                                                        {errors.address}
+                                                    </div>
+                                                ) : null}
+                                            </div>
 
                                         </div>
-                                        {/* <div class="col-md-12"><label class="labels">Address</label><input type="text" class="form-control" placeholder="Enter Address" value="" /></div> */}
+                                        {/* <div class="col-md-12"><label class="labels">Address</label><input type="text" class="form-control"  value="" /></div> */}
                                         <div class="mt-3"><button class="btn btn-danger profile-button" type="submit">Save Profile</button></div>
                                     </div>
                                 </div>

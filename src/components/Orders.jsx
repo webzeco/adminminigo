@@ -1,123 +1,177 @@
-import React from 'react'
-import OrderCard from './common/OrderCard';
-import './styles/order.css';
-export default function Orders({ orders, setOrderForDetail }) {
-
+import React, { Component } from "react";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Dropdown from "react-bootstrap/Dropdown";
+import Loader from "react-loader-spinner";
+import Pagination from "./common/Pagination";
+import { connect } from "react-redux";
+import order, {
+  changePage,
+  sortOrders,
+  loadOrders,
+  filterPrice,
+  addDetailedOrder,
+} from "../storemini/reducers/order";
+import { Link } from "react-router-dom";
+class Orders extends Component {
+  state = {
+    data: [],
+  };
+  componentDidMount() {
+    this.props.loadOrders();
+    this.setState({ data: this.props.orders });
+  }
+ 
+addDetailedOrderHandler=(order)=>{
+  this.props.addDetailedOrder(order);
+  this.props.history.push('/orderDetail');
+};
+  render() {
     return (
+<<<<<<< HEAD
         <div>
             <div className="container">
                 <div className="display-7 px-3 fw-bold mt-3">Order List</div>
+=======
+      <div>
+        {/* <!-- ======= price and sort of product======= -->  */}
+        <div className="container-fluid border mt-1 p-2">
+          <div className="row">
+            <div className="col-6 text-center">
+              <div className="dropdown d-flex justify-content-center message_look">
+                {/* <Dropdown
+                  variant="light"
+                  alignRight
+                  title={this.props.price}
+                  id="dropdown-menu-align-right"
+                  onSelect={this.props.filterPrice}
+                >
+                  <Dropdown.Item eventKey="All">All</Dropdown.Item>
+                  <Dropdown.Item eventKey="Less than Rs.500">
+                    Less than Rs.500
+                  </Dropdown.Item>
+                  <Dropdown.Item eventKey="Rs.500-Rs.1000">
+                    Rs.500-Rs.1000
+                  </Dropdown.Item>
+                  <Dropdown.Item eventKey="Greater then Rs.1000">
+                    Greater then Rs.1000
+                  </Dropdown.Item>
+                </Dropdown> */}
+              </div>
+>>>>>>> edee163656e1e3dcd4b0485d686bee0056696595
             </div>
-            <div className="container ">
-                <div className="card mx-3 w-100  ">
-                    <div className="row text-center d-flex justify-content-between bg-light pt-3 transCard">
-                        <div className="col-4 m-2 pb-2 ">
-                            <div className="form-outline">
-                                <input type="search" id="form1" className="form-control form-control-lg" placeholder="Search"
-                                    aria-label="Search" />
-                            </div>
-                        </div>
-
-
-
-
-                        <div className=" col-sm-12  col-md-12 col-lg-6">
-                            <div className="pad">
-                                <div className="row d-flex justify-content-between">
-                                    <div className="col-6">
-                                        <div className="dropdown">
-                                            <button
-                                                className="btn btn-light dropdown-toggle"
-                                                type="button"
-                                                id="dropdownMenuButton"
-                                                data-mdb-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
-                                                Dropdown button
-                                            </button>
-                                            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <li><a className="dropdown-item" href="#">Action</a></li>
-                                                <li><a className="dropdown-item" href="#">Another action</a></li>
-                                                <li><a className="dropdown-item" href="#">Something else here</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="col-6">
-                                        <div className="dropdown">
-                                            <button
-                                                className="btn btn-light dropdown-toggle"
-                                                type="button"
-                                                id="dropdownMenuButton"
-                                                data-mdb-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
-                                                Dropdown button
-                                            </button>
-                                            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <li><a className="dropdown-item" href="#">Action</a></li>
-                                                <li><a className="dropdown-item" href="#">Another action</a></li>
-                                                <li><a className="dropdown-item" href="#">Something else here</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div className="col-6 d-flex justify-content-center">
+              <span type="text" className=" pt-2  count mx-3 ">
+                {this.props.itemsCount} items
+              </span>
+              <div className="dropdown message_look fw-bold ">
+                <DropdownButton
+                  variant="light"
+                  alignRight
+                  title={this.props.sort}
+                  id="dropdown-menu-align-right"
+                  onSelect={this.props.sortOrders}
+                >
+                  <Dropdown.Item eventKey="sort">Sort</Dropdown.Item>
+                  <Dropdown.Item eventKey="New Arrivals">
+                    New Arrivals
+                  </Dropdown.Item>
+                  <Dropdown.Item eventKey="Price: High to Low">
+                    Price: High to Low{" "}
+                  </Dropdown.Item>
+                  <Dropdown.Item eventKey="Price: Low to High">
+                    {" "}
+                    Price: Low to High
+                  </Dropdown.Item>
+                  {/* <Dropdown.Divider /> */}
+                </DropdownButton>
+              </div>
             </div>
-            {/* header */}
-            <div class="container ">
-                <div class="card mx-3 w-100 fs-3 card_hide">
-                    <div class="row text-center d-flex justify-content-around bg-light pt-3 transCard">
-                        <div class="col-1 ">
-                            <div class="pad">
-                                <h4 class="lead fs-5 pad fw-bold  text-gray">No.</h4>
-                            </div>
-                        </div>
-                        <div class="col-2 ">
-                            <div class="pad">
-                                <h4 class="lead fs-5 fw-bold  ">Name</h4>
-                            </div>
-                        </div>
-
-                        <div class="col-2 ">
-                            <div class="pad">
-                                <h4 class="lead fw-bold fs-5  ">Email</h4>
-                            </div>
-                        </div>
-
-                        <div class="col-1">
-                            <div class="pad fw-bold fs-5  ">
-                                <p>Total</p>
-                            </div>
-                        </div>
-
-                        <div class="col-2">
-                            <div class="pad">
-                                <h4 class="lead fs-5 fw-bold  pt-1 pb-1">Status</h4>
-                            </div>
-                        </div>
-
-
-                        <div class=" col-2">
-                            <div class="pad fw-bold fs-5  ">
-                                <p>Date</p>
-                            </div>
-                        </div>
-                        <div class=" col-2 ">
-                            <div class="pad fw-bold fs-5">
-                                <p>Action</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            {/* end header */}
-            {/* <h1 className='display-3 text-center' >Order page here</h1> */}
-            {orders.map((order, index) => <OrderCard key={index} order={order} setOrderForDetail={setOrderForDetail} index={index + 1} />)}
+          </div>
         </div>
-    )
+        {/* <!-- ======= price and sort of product ends======= -->  */}
+
+        {/* <!-- ======= product display in cards ======= -->  */}
+
+        <div className="container pt-5">
+          <div className="row ">
+
+            <div class="table-responsive">
+              <table className="table  ">
+                <thead className="bg-danger text-white ">
+                  <tr>
+                    <th scope="col bold">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Guest</th>
+                    <th scope="col">createdAt</th>
+                    <th scope="col">Number Of Products</th>
+                    <th scope="col">shipping charges</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Charged</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <Loader   class='text-center'  visible={this.props.loading} type="Puff" color="#e61523" height={80} width={80} />
+
+                <tbody>
+                  {this.props.orders.map((order, index) => {
+                    return (
+                      <tr key={index}>
+                        <td>{++index}</td>
+                        <td>{order.name}</td>
+                        <td>{order.guest && <i className="fas fa-check text-primary"></i>}
+                          {!order.guest && <i class="fas fa-times"></i>}</td>
+                        <td>{order.createdAt.substring(0, 10)}</td>
+                        <td>{order.products.length}</td>
+                        <td>{order.shipping.charges}</td>
+                        <td> {order.status}</td>
+                        <td>{order.total}</td>
+                        <td>{order.payment.charge.amount}</td>
+                        <td><button type="button" class="btn btn-secondary" onClick={()=>this.addDetailedOrderHandler(order)}>Detail</button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+        {/* <!-- ======= product display in cards ends ======= -->  */}
+        {/* <!-- ======= pagination ======= -->  */}
+
+        <ul className="pagination justify-content-center p-4  message_look">
+          <Pagination
+            className="bg-danger"
+            itemsCount={this.props.itemsCount}
+            pageSize={this.props.pageSize}
+            currentPage={this.props.currentPage}
+            onPageChange={(page) => this.props.changePage(page)}
+          />
+        </ul>
+
+        {/* <!-- ======= pagination ends ======= -->  */}
+      </div>
+    );
+  }
 }
+
+const mapStateToProps = (state) => ({
+  orders: state.entities.orders.filtered,
+  category: state.entities.categories.selected,
+  loading: state.entities.orders.loading,
+  itemsCount: state.entities.orders.pagination.itemsCount,
+  currentPage: state.entities.orders.pagination.currentPage,
+  pageSize: state.entities.orders.pagination.pageSize,
+  sort: state.entities.orders.sort,
+  price: state.entities.orders.priceFilter,
+});
+const mapDispatchToProps = (dispatch) => ({
+  loadOrders: () => dispatch(loadOrders()),
+  changePage: (page) => dispatch(changePage(page)),
+  sortOrders: (path) => dispatch(sortOrders(path)),
+  filterPrice: (path) => dispatch(filterPrice(path)),
+  addDetailedOrder: (order) => dispatch(addDetailedOrder(order))
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Orders);

@@ -41,9 +41,6 @@ export default function OrderCard({order,index,setOrderForDetail}) {
                                 <p>{order.createdAt.substring(0,10)}</p>
                             </div>
                         </div>
-
-
-
                         <div class=" col-sm-4  col-md-2 col-lg-2">
                             <div class="pad">
                                 <div class="row d-grid gap-1 justify-content-center">

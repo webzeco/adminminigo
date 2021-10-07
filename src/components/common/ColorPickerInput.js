@@ -4,17 +4,8 @@ import { SketchPicker } from 'react-color';
 
 const ColorPickerInput = props => {
     const [tags, setTags] = useState([{ id: 1, text: '' }])
-
     const sendTag = (tag) => {
-        let targetIndex;
-        
-        tags.map(
-            (item, index) => {
-                if (item.id === tag.id) {
-                    targetIndex = index;
-                }
-            }
-        );
+        let targetIndex=tags.findIndex(item => item.id === tag.id);
         tags[targetIndex].text = tag.text;
         props.sendTags(tags)
     }
@@ -66,19 +57,18 @@ const ColorPickerInput = props => {
 
 
 
-
-
 class ColorPicker extends React.Component {
   state = {
     displayColorPicker: false,
     color: '#fff',
+    qty:0,
   };
-
   handleClick = () => {
     this.setState({ displayColorPicker: !this.state.displayColorPicker },()=>{
-        const tag = {}
+        const tag = {};
         tag.id = this.props.id;
-        tag.text = this.state.color.hex
+        tag.text = this.state.color.hex;
+        tag.qty=this.state.qty;
         this.props.setText(tag)    
     })
   };
@@ -88,6 +78,7 @@ class ColorPicker extends React.Component {
         const tag = {}
         tag.id = this.props.id;
         tag.text = this.state.color.hex
+        tag.qty=this.state.qty;
         this.props.setText(tag)    
     })
   };
@@ -96,14 +87,16 @@ class ColorPicker extends React.Component {
     this.setState({ color: color },()=>{
         const tag = {}
         tag.id = this.props.id;
-        tag.text = this.state.color.hex
+        tag.text = this.state.color.hex;
+        tag.qty=this.state.qty;
         this.props.setText(tag)    
     })
   };
   component=()=>{
     const tag = {}
     tag.id = this.props.id;
-    tag.text = this.state.color.hex
+    tag.text = this.state.color.hex;
+    tag.qty=this.state.qty;
     this.props.setText(tag)
     console.log("This is called repeatedly")
   }
@@ -149,7 +142,6 @@ class ColorPicker extends React.Component {
           <div style={ styles.cover } onClick={ this.handleClose }/>
           <SketchPicker color={ this.state.color } onChange={ this.handleChange } />
         </div> : null }
-
       </div>
     )
   }

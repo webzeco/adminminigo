@@ -77,17 +77,11 @@ export default function Login({ onLogin }) {
                 </div>
               ) : null}
             </div>
-
             <div class="cart mt-4 align-items-center">
               <button type="submit" class="btn text-uppercase w-100 creat_btn ">
-                {/* <a href="/">SIGN IN</a> */}
                 SIGN IN
               </button>
             </div>
-
-            <Link class="creat_look text-center fw-bold mb-4" to="/signup">
-              <h5 class=" mb-2 mt-5 creat_look"> CREAT ACCOUNT</h5>
-            </Link>
           </Form>
         )}
       </Formik>

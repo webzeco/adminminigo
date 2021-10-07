@@ -5,7 +5,6 @@ import SideNavBar from './common/SideNavBar';
 import { Route, Switch, useHistory } from "react-router-dom";
 import AddProduct from './addProductComponent';
 import ShowProducts from './ShowProducts';
-import { productData } from './data';
 import Login from './Login';
 import Orders from './Orders';
 import { UserContext } from './contexts/UserContext';
@@ -16,7 +15,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import { forgotPassword, login, resetPassword } from '../services/authService';
 import { addNewProduct, addNewProductImages, deleteProduct, getAllProducts } from '../services/productServices';
 import { getMe } from '../services/UsersService';
-import { getAllOrders } from '../services/orderServices';
 import OrderDetail from './OrderDetail';
 import { createSubCategory, deleteSubCategory, getAllCategories } from '../services/categoryService';
 import { CategoryContext } from './contexts/categoryContext';
@@ -28,13 +26,12 @@ import Forgot from './Forgot';
 import Baskets from './Baskets';
 import UpdatePassword from './UpdatePassword';
 import AddUser from './AddUser';
-import Users from './Users';
+import Customers from './Customers';
+import EditProduct from './EditProduct';
 export default function Main() {
   const history = useHistory();
   const [user, setUser] = useState();
   const [products, setProducts] = useState([]);
-  const [orders, setOrders] = useState([]);
-  const [OrderForDetail, setOrderForDetail] = useState();
   const [categories, setCategories] = useState();
 
 
@@ -55,7 +52,6 @@ export default function Main() {
   useEffect(() => {
     getAllProductHandler();
     getMeHandler();
-    getAllOrderHandler();
     getAllCategoriesHandler();
     return () => {
       console.log('clean up');
@@ -79,22 +75,15 @@ export default function Main() {
     }
   }
   const forgotHandler = async (email) => {
-    const data= await  forgotPassword(email)
-     if(data.data.status==='success')
-     toast.success("Email successfully sent Please check your mail");
-    else{
-     toast.error(data.data.message);
-     history.push("/");
+    const data = await forgotPassword(email)
+    if (data.data.status === 'success')
+      toast.success("Email successfully sent Please check your mail");
+    else {
+      toast.error(data.data.message);
+      history.push("/");
     }
-   };
-  const signUpHandler = (user) => {
-    setUser(user);
-    history.push('/');
-  }
-  const getAllOrderHandler = async () => {
-    const { data } = await getAllOrders();
-    setOrders(data.data);
-  }
+  };
+
   const getMeHandler = async () => {
     const { data } = await getMe();
     // console.log({ data });
@@ -116,13 +105,6 @@ export default function Main() {
     }
     console.log(products);
   }
-
-  const setOrderForDetailHandler = (order) => {
-    setOrderForDetail(order)
-    console.log(order);
-    history.push('/orderDetail');
-  }
-
   const addProductHandler = async (product, images) => {
     console.log(product);
     const newProduct = await addNewProduct(product);
@@ -132,7 +114,7 @@ export default function Main() {
       position: toast.POSITION.TOP_CENTER
     });
     // history.push('/');
-    window.location = '/';
+    // window.location = '/';
   }
   const createSubCategoryHandler = async (data) => {
     const allCates = [...categories];
@@ -183,11 +165,11 @@ export default function Main() {
     console.log({ products });
   }
 
-  const resetPasswordHandler=async (values)=>{
-    const {password,confirmPassword,token}=values;
+  const resetPasswordHandler = async (values) => {
+    const { password, confirmPassword, token } = values;
     console.log(values);
     try {
-      await resetPassword({password,confirmPassword },token);
+      await resetPassword({ password, confirmPassword }, token);
       toast.success(" Password Reset Successfully !!", {
         position: toast.POSITION.TOP_CENTER,
       });
@@ -195,7 +177,7 @@ export default function Main() {
         toast.success(" Login with New Password !!", {
           position: toast.POSITION.TOP_CENTER,
         });
-         history.push("/login");
+        history.push("/login");
       }, 1500);
     } catch (error) {
       console.log(error);
@@ -204,6 +186,7 @@ export default function Main() {
       });
     }
   }
+
   return (
     <UserContext.Provider value={{ user, loginHandler }}>
       <CategoryContext.Provider value={{ categories, deleteSubCategoryHandler, createSubCategoryHandler }}>
@@ -235,7 +218,11 @@ export default function Main() {
               <Route
                 exact
                 path="/showProduct"
-                render={(props) => <ShowProducts deleteProduct={deleteProductHandler} products={products} />}
+                render={(props) => <ShowProducts
+                  deleteProduct={deleteProductHandler}
+                  products={products}
+                  {...props}
+                />}
               />
 
               <Route
@@ -245,37 +232,42 @@ export default function Main() {
               />
               <Route
                 exact
+                path="/editProduct"
+                render={(props) => <EditProduct {...props} />}
+              />
+              <Route
+                exact
                 path="/login"
                 render={(props) => <Login onLogin={loginHandler} />}
               />
-               <Route
-                  exact
-                  path="/resetPassword/:token"
-                  render={(props) => (
-                    <ResetPassword onResetPassword={resetPasswordHandler} {...props} />
-                  )}
-                />
-                <Route
-                  exact
-                  path="/forgot"
-                  render={(props) => (
-                    <Forgot onForgot={forgotHandler} {...props} />
-                  )}
-                />
-                 <Route
-                  exact
-                  path="/updatePassword"
-                  render={(props) => (
-                    <UpdatePassword  {...props} />
-                  )}
-                />
-                 <Route
-                  exact
-                  path="/users"
-                  render={(props) => (
-                    <Users  {...props} />
-                  )}
-                /> <Route
+              <Route
+                exact
+                path="/resetPassword/:token"
+                render={(props) => (
+                  <ResetPassword onResetPassword={resetPasswordHandler} {...props} />
+                )}
+              />
+              <Route
+                exact
+                path="/forgot"
+                render={(props) => (
+                  <Forgot onForgot={forgotHandler} {...props} />
+                )}
+              />
+              <Route
+                exact
+                path="/updatePassword"
+                render={(props) => (
+                  <UpdatePassword  {...props} />
+                )}
+              />
+              <Route
+                exact
+                path="/customers"
+                render={(props) => (
+                  <Customers  {...props} />
+                )}
+              /> <Route
                 exact
                 path="/addUser"
                 render={(props) => (
@@ -285,17 +277,17 @@ export default function Main() {
               <Route
                 exact
                 path="/orders"
-                render={(props) => <Orders orders={orders} setOrderForDetail={setOrderForDetailHandler} />}
+                render={(props) => <Orders {...props} />}
               />
               <Route
                 exact
                 path="/transactions"
-                render={(props) => <Transaction orders={orders} setOrderForDetail={setOrderForDetailHandler} />}
+                render={(props) => <Transaction />}
               />
               <Route
                 exact
                 path="/orderDetail"
-                render={(props) => <OrderDetail order={OrderForDetail} />}
+                render={(props) => <OrderDetail />}
               />
               <Route
                 exact
