@@ -86,7 +86,7 @@ class VariantsDataComponent extends Component {
   }
   render() {
     return (
-      <div>
+      <div >
         <h3 className="fw-bold ">Options</h3>
         {this.props.variantsData.map((item) => {
           return (

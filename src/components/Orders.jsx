@@ -6,7 +6,7 @@ export default function Orders({ orders, setOrderForDetail }) {
     return (
         <div>
             <div className="container">
-                <div className="display-6 px-3 fw-bold mt-3">Order List</div>
+                <div className="display-7 px-3 fw-bold mt-3">Order List</div>
             </div>
             <div className="container ">
                 <div className="card mx-3 w-100  ">
