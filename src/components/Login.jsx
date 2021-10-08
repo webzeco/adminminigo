@@ -10,23 +10,23 @@ const loginSchema = Yup.object().shape({
 });
 export default function Login({ onLogin }) {
   const [role, setRole] = useState('admin');
-  const handleChange=(e)=>{
+  const handleChange = (e) => {
     setRole(e.target.value);
     console.log(e.target.value);
   }
   return (
     <div class="container pt-5 mt-5 pb-5 font_fam w-auto">
-      <h3 class="submit-content fw-bold text-center mt-5">LOGIN</h3>
+      <h3 class="submit-content fw-bold text-center mt-5" style={{ color: "#24a0ed" }}>LOGIN</h3>
       <Formik
         initialValues={{
           username: "",
           password: "",
-          role:"admin"
+          role: "admin"
         }}
         validationSchema={loginSchema}
         onSubmit={(values) => {
           // same shape as initial values
-          values.role=role;
+          values.role = role;
           onLogin(values);
           // console.log(values);
         }}
@@ -65,12 +65,12 @@ export default function Login({ onLogin }) {
                 <p>FORGOT PASSWORD?</p>
               </Link>
             </div>
-            
+
             <div class="mb-4 mt-5 text-primary">
-            <Field type='select'  component="select" name="role" value={role} className={"form-control"} onChange={ handleChange }>
-                   <option  value="admin">Admin</option>
-                   <option  value="user">User</option>
-                </Field>
+              <Field type='select' component="select" name="role" value={role} className={"form-control"} onChange={handleChange}>
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+              </Field>
               {errors.role && touched.role ? (
                 <div class="alert alert-danger  p-2" role="alert">
                   {errors.role}

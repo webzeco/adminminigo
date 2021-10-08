@@ -1,2 +1,55 @@
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:regular,bold,italic&subset=latin,latin-ext);@import url(https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap);.font_fam{color:#333}.fg_link,.font_fam{font-family:Cambria,Cochin,Georgia,Times,"Times New Roman",serif}.creat_btn{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif}.form-control:focus{outline:none!important}.creat_look{font-size:16px!important;color:#333!important;font-family:"Lato"!important}.inputs_look{border-radius:0!important}.message_look,.submit-content{font-family:"Montserrat"}.submit-content{color:#e4563c}.fg_link{text-decoration:none;font-size:12px!important}.fg_link,.fg_link:hover{color:#999}.form-control:focus{box-shadow:none!important}.creat_btn{font-weight:700!important;background-color:#e4563c!important;font-size:16px;border-radius:0!important;height:50px;font-family:"Montserrat";color:#fff!important}body{font-family:Roboto,Helvetica,Arial,sans-serif}
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:regular,bold,italic&subset=latin,latin-ext);
+@import url(https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap);
+.font_fam {
+  color: #333;
+}
+.fg_link,
+.font_fam {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+.creat_btn {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+.form-control:focus {
+  outline: none !important;
+}
+.creat_look {
+  font-size: 16px !important;
+  color: #333 !important;
+  font-family: "Lato" !important;
+}
+.inputs_look {
+  border-radius: 0 !important;
+}
+.message_look,
+.submit-content {
+  font-family: "Montserrat";
+}
+.submit-content {
+  color: skyblue;
+}
+.fg_link {
+  text-decoration: none;
+  font-size: 12px !important;
+}
+.fg_link,
+.fg_link:hover {
+  color: #999;
+}
+.form-control:focus {
+  box-shadow: none !important;
+}
+.creat_btn {
+  font-weight: 700 !important;
+  background-color: #24a0ed !important;
+  font-size: 16px;
+  border-radius: 0 !important;
+  height: 50px;
+  font-family: "Montserrat";
+  color: #fff !important;
+}
+body {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
 /*# sourceMappingURL=main.ff5f46af.chunk.css.map */

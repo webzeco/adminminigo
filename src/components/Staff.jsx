@@ -30,20 +30,20 @@ export default function Staff() {
     return (
         <div>
             <div className="container">
-                <div className="display-6 px-3 fw-bold mt-3 ">ALL USERS</div>
+                <div className="display-6 px-3 fw-bold mt-3 ">All Users</div>
             </div>
-            <button class="btn text-center p-0"><Link class="btn btn-secondary 
-             p-1" to='/addUser'>Add New User</Link></button>
+            <button class="btn text-center p-0 "><Link class="btn btn-warning 
+             mx-3 pt-1 mt-2" to='/addUser'>Add New User</Link></button>
             <div class="table-responsive">
-                <table className="table mx-2 mt-3">
+                <table className="table mx-3 mt-3 ">
 
                     <thead>
-                        <tr className="bg-info">
-                            <th scope="col">#</th>
+                        <tr className="bg-info text-white">
+                            <th scope="col">Sr.</th>
                             {/* <th scope="col">User</th> */}
-                            <th scope="col">Username</th>
+                            <th scope="col">User Name</th>
                             <th scope="col">Email</th>
-                            <th scope="col">CreatedAt</th>
+                            <th scope="col">Created At</th>
                             <th scope="col">Action</th>
 
                         </tr>
@@ -52,12 +52,11 @@ export default function Staff() {
                         console.log(user);
                         return (
                             <tr>
-                                <td className="px-2" style={{ width: "5%" }}>{index + 1}</td>
-                                {/* <td style={{width:"25%"}}>{user.profile}</td> */}
-                                <td style={{ width: "25%" }}>{user.name}</td>
-                                <td style={{ width: "25%" }} >{user.email}</td>
+                                <td className="px-2 fw-bold" style={{ width: "2%" }}>{index + 1}</td>
+                                <td style={{ width: "10%" }}>{user.name}</td>
+                                <td style={{ width: "10%" }} >{user.email}</td>
                                 <td style={{ width: "10%" }}>{user.createdAt.substring(0, 10)}</td>
-                                <td style={{ width: "10%" }}><div class="d-grid gap-1 mx-auto">
+                                <td style={{ width: "5%" }}><div class="d-grid gap-1  justify-content-start">
                                     <button class="btn btn-sm btn-info" type="button">Detail</button>
                                     <button onClick={() => onDeleteHandler(user)} class="btn btn-sm btn-danger" type="button">Delate</button>
                                 </div></td>
@@ -65,7 +64,7 @@ export default function Staff() {
                         );
                     })}
                 </table>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }

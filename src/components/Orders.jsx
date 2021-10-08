@@ -4,6 +4,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Loader from "react-loader-spinner";
 import Pagination from "./common/Pagination";
 import { connect } from "react-redux";
+import './styles/showproduct.css';
 import order, {
   changePage,
   sortOrders,
@@ -20,27 +21,25 @@ class Orders extends Component {
     this.props.loadOrders();
     this.setState({ data: this.props.orders });
   }
- 
-addDetailedOrderHandler=(order)=>{
-  this.props.addDetailedOrder(order);
-  this.props.history.push('/orderDetail');
-};
+
+  addDetailedOrderHandler = (order) => {
+    this.props.addDetailedOrder(order);
+    this.props.history.push('/orderDetail');
+  };
   render() {
     return (
-<<<<<<< HEAD
-        <div>
-            <div className="container">
-                <div className="display-7 px-3 fw-bold mt-3">Order List</div>
-=======
       <div>
+        <div className="container">
+          <div className="display-6 px-3 fw-bold mt-3 ">All Orders</div>
+        </div>
         {/* <!-- ======= price and sort of product======= -->  */}
-        <div className="container-fluid border mt-1 p-2">
+        <div className="container-fluid border mt-1 px-2 pb-">
           <div className="row">
             <div className="col-6 text-center">
               <div className="dropdown d-flex justify-content-center message_look">
                 {/* <Dropdown
                   variant="light"
-                  alignRight
+                  alignRightP
                   title={this.props.price}
                   id="dropdown-menu-align-right"
                   onSelect={this.props.filterPrice}
@@ -57,9 +56,8 @@ addDetailedOrderHandler=(order)=>{
                   </Dropdown.Item>
                 </Dropdown> */}
               </div>
->>>>>>> edee163656e1e3dcd4b0485d686bee0056696595
             </div>
-            <div className="col-6 d-flex justify-content-center">
+            <div className="col-6 d-flex justify-content-end">
               <span type="text" className=" pt-2  count mx-3 ">
                 {this.props.itemsCount} items
               </span>
@@ -71,7 +69,7 @@ addDetailedOrderHandler=(order)=>{
                   id="dropdown-menu-align-right"
                   onSelect={this.props.sortOrders}
                 >
-                  <Dropdown.Item eventKey="sort">Sort</Dropdown.Item>
+                  <Dropdown.Item eventKey="Sort">Sort</Dropdown.Item>
                   <Dropdown.Item eventKey="New Arrivals">
                     New Arrivals
                   </Dropdown.Item>
@@ -92,42 +90,46 @@ addDetailedOrderHandler=(order)=>{
 
         {/* <!-- ======= product display in cards ======= -->  */}
 
-        <div className="container pt-5">
+        <div className="container pt-3">
           <div className="row ">
-
             <div class="table-responsive">
               <table className="table  ">
-                <thead className="bg-danger text-white ">
+                <thead className="bg-info text-white ">
                   <tr>
-                    <th scope="col bold">#</th>
+                    <th scope="col bold">Sr.</th>
                     <th scope="col">Name</th>
                     <th scope="col">Guest</th>
-                    <th scope="col">createdAt</th>
-                    <th scope="col">Number Of Products</th>
+                    <th scope="col">No. Of Products</th>
                     <th scope="col">shipping charges</th>
+                    <th scope="col">Created At</th>
                     <th scope="col">Status</th>
                     <th scope="col">Total</th>
                     <th scope="col">Charged</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
-                <Loader   class='text-center'  visible={this.props.loading} type="Puff" color="#e61523" height={80} width={80} />
+                <div className='loader'>
+                  <Loader visible={this.props.loading}
+                    type="Puff" color="#e61523" height={80} width={80} />
+                </div>
 
                 <tbody>
                   {this.props.orders.map((order, index) => {
                     return (
                       <tr key={index}>
-                        <td>{++index}</td>
-                        <td>{order.name}</td>
-                        <td>{order.guest && <i className="fas fa-check text-primary"></i>}
+                        <td className="ps-3 fw-bold" >{++index}</td>
+                        <td className="ps-2" >{order.name}</td>
+
+                        <td className="px-4">{order.guest && <i className="fas fa-check text-primary"></i>}
                           {!order.guest && <i class="fas fa-times"></i>}</td>
-                        <td>{order.createdAt.substring(0, 10)}</td>
-                        <td>{order.products.length}</td>
-                        <td>{order.shipping.charges}</td>
-                        <td> {order.status}</td>
-                        <td>{order.total}</td>
-                        <td>{order.payment.charge.amount}</td>
-                        <td><button type="button" class="btn btn-secondary" onClick={()=>this.addDetailedOrderHandler(order)}>Detail</button>
+
+                        <td className="ps-5" >{order.products.length}</td>
+                        <td className="ps-5" >{order.shipping.charges}</td>
+                        <td className="ps-2" >{order.createdAt.substring(0, 10)}</td>
+                        <td className="ps-2"> {order.status}</td>
+                        <td className="ps-2">{order.total}</td>
+                        <td className="ps-2">{order.payment.charge.amount}</td>
+                        <td className="ps-2"><button type="button" class="btn btn-secondary" onClick={() => this.addDetailedOrderHandler(order)}>Detail</button>
                         </td>
                       </tr>
                     );

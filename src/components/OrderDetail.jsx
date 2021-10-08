@@ -60,7 +60,7 @@ class OrderDetail extends Component {
     onchangeStatusHandler = () => {
         if (this.state.error.length > 0) return toast.warn("Some Product is not available");
         console.log(this.props.order._id, this.state.status);
-        this.props.changeOrderStatus(this.props.order._id,{status:this.state.status});
+        this.props.changeOrderStatus(this.props.order._id, { status: this.state.status });
     };
     componentDidMount() {
         // alert(JSON.stringify(this.props.order));
@@ -77,20 +77,21 @@ class OrderDetail extends Component {
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                <Loader    visible={this.props.loading} type="Puff" color="#e61523" height={80} width={80} />
-                                        <button type="button" class="btn btn-secondary text-center" data-bs-dismiss="modal">{this.state.status}</button>
+                                    <Loader visible={this.props.loading} type="Puff" color="#e61523" height={80} width={80} />
+                                    <button type="button" class="btn btn-secondary text-center" data-bs-dismiss="modal">{this.state.status}</button>
                                 </div>
                             </div>
                         </div>
-                        <div className="container-fluid pb-5">
+                        <div className="container">
                             <div className="display-6 px-3 fw-bold mt-3">Order Detail</div>
                             <div className="display-7 px-3">Details for Order ID:<span>{this.props.order._id}</span></div>
                         </div>
-                        <div className="container-fluid bg_color pt-3  rounded">
-                            <div className="card w-auto mx-4  rounded">
+
+                        <div className="container bg_color pt-3  rounded">
+                            <div className="card w-auto mx-2  rounded">
                                 <div className="row  d-flex justify-content-between bg-light p-3 ">
                                     <div className="col-lg-8 col-md-8 col-sm-8">
-                                        <div className="display-8"><i className="fa fa-calendar" aria-hidden="true"></i>
+                                        <div className="display-8"><i className="fa fa-calendar pe-1" aria-hidden="true"></i>
                                             {this.props.order.createdAt}</div>
                                         <div className="display-9 ">Details for Order ID:<span>{this.props.order._id}</span></div>
                                     </div>
@@ -142,7 +143,7 @@ class OrderDetail extends Component {
                                         <div className="display-8">Status:{this.props.order.shipping.status}</div>
                                     </div>
                                     <div className="col-lg-4 col-md-12 mb-2">
-                                        <div className="fw-bold mb-2"><i className="fa fa-location mx-1"></i>Deliver to</div>
+                                        <div className="fw-bold mb-2"><i className="fas fa-location-arrow mx-1"></i>Deliver to</div>
                                         <div className="display-8">Address: {this.props.order.shipping.address} {"  "}
                                             {this.props.order.shipping.province} {"  "} {this.props.order.shipping.city} {"  "}
                                             {this.props.order.shipping.area}</div>
@@ -164,6 +165,7 @@ class OrderDetail extends Component {
                                                 </tr>
                                             </thead>
                                             <tbody>
+
                                                 {this.props.order.products.map((prod, index) => {
                                                     return (
                                                         <tr key={index}>
@@ -220,7 +222,7 @@ class OrderDetail extends Component {
 
                                 </div>
 
-                                <div className="col-lg-8 col-md-12 back  pt-3">
+                                <div className="col-lg-8 col-md-12 back px-3 pt-3">
                                     {console.log(this.props.order.payment.charge.paid)}
                                     <div className="card rounded p-3">
                                         <div className="display-7 px-3 fw-bold mb-2">Payment Info</div>
@@ -249,6 +251,6 @@ const mapStateToProps = (state) => ({
     // products:state.entities.products.list
 });
 const mapDispatchToProps = (dispatch) => ({
-    changeOrderStatus: (id,data) => dispatch(changeOrderStatus(id,data))
+    changeOrderStatus: (id, data) => dispatch(changeOrderStatus(id, data))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(OrderDetail);

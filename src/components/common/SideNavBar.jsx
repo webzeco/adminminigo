@@ -85,7 +85,8 @@ export default function SideNavBar() {
                         {user?.role === 'admin' && (
                             <li className="sidebar-item">
                                 <Link className="sidebar-link" to="/transactions">
-                                    <i className="align-middle" data-feather="dollar-sign"></i> <span
+                                    <i class="fas fa-dollar-sign"></i>
+                                    <span
                                         className="align-middle">Transaction</span>
                                 </Link>
                             </li>
@@ -94,7 +95,8 @@ export default function SideNavBar() {
 
                             <li className="sidebar-item">
                                 <Link className="sidebar-link" to="/reviews">
-                                    <i className="align-middle" data-feather="align-justify"></i> <span
+                                    <i class="fas fa-star"></i>
+                                    <span
                                         className="align-middle">Reviews</span>
                                 </Link>
                             </li>

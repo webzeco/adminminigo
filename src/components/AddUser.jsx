@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { addUser } from "../services/UsersService";
 
 export default function AddUser() {
-  const history=useHistory();
+  const history = useHistory();
 
   const userSchema = Yup.object().shape({
     name: Yup.string()
@@ -18,44 +18,44 @@ export default function AddUser() {
     password: Yup.string()
       .min(6)
       .max(50
-        )
+      )
       .required("Required").label('Password'),
-      confirmPassword: Yup.string()
+    confirmPassword: Yup.string()
       .min(6)
       .max(50)
       .required("Required").label('PasswordConfirm'),
     email: Yup.string().email().required("Required").label('Email'),
     contactNo: Yup.string().required("Required").label('Contact number'),
-  
+
   });
-  const addUserHandler=async(values)=>{
+  const addUserHandler = async (values) => {
     try {
       await addUser(values);
       history.push('/users');
-toast.success("User Successfully added");
+      toast.success("User Successfully added");
     } catch (error) {
       toast.error('Operation Failed !!!');
     }
   }
-  const updatePasswordHandler=async (values)=>{
+  const updatePasswordHandler = async (values) => {
     try {
-        const {data}=await updatePassword(values);
-        console.log(data);
-        toast.success("Password Successfully Updated !!!")
+      const { data } = await updatePassword(values);
+      console.log(data);
+      toast.success("Password Successfully Updated !!!")
     } catch (error) {
-        toast.error("Please enter Correct Current Password !");
+      toast.error("Please enter Correct Current Password !");
     }
   }
   return (
-    <div class="container pt-5 mt-5 pb-5 font_fam w-auto">
-      <h3 class="submit-content fw-bold text-center mt-5">ADD NEW USER</h3>
+    <div class="container mt-1  pb-5 font_fam w-50">
+      <h3 class="submit-content fw-bold text-center mt-3" style={{ color: "#24a0ed" }}>ADD NEW USER</h3>
       <Formik
         initialValues={{
           name: "",
           email: "",
-          contactNo:"",
-          password:"",
-          confirmPassword:""
+          contactNo: "",
+          password: "",
+          confirmPassword: ""
         }}
         validationSchema={userSchema}
         onSubmit={(values) => {
@@ -127,13 +127,14 @@ toast.success("User Successfully added");
                 </div>
               ) : null}
             </div>
-          <div class="cart mt-4 align-items-center">
+            <div class="cart mt-4 align-items-center">
               <button type="submit" class="btn text-uppercase w-100 creat_btn ">
                 Add New User
               </button>
             </div>
             <Link class="creat_look text-center fw-bold mb-4" to="/">
-              <h5 class=" mb-2 mt-5 creat_look">Go Back</h5>
+              <h5 class=" mb-2 mt-5 creat_look" >Go Back</h5>
+
             </Link>
           </Form>
         )}

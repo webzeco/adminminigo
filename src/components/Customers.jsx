@@ -42,11 +42,11 @@ export default function Customers() {
             <div class="table-responsive">
                 <table className="table mx-2 mt-3">
                     <thead>
-                        <tr className="bg-info">
-                            <th scope="col">#</th>
+                        <tr className="bg-info text-white">
+                            <th scope="col">Sr.</th>
                             <th scope="col">Username</th>
                             <th scope="col">Email</th>
-                            <th scope="col">CreatedAt</th>
+                            <th scope="col">Created At</th>
                             <th scope="col">Action</th>
 
                         </tr>
@@ -55,11 +55,11 @@ export default function Customers() {
                         console.log(user);
                         return (
                             <tr>
-                                <td className="px-2" style={{ width: "5%" }}>{index + 1}</td>
-                                <td style={{ width: "25%" }}>{user.name}</td>
-                                <td style={{ width: "25%" }} >{user.email}</td>
+                                <td className="px-2 fw-bold" style={{ width: "2%" }}>{index + 1}</td>
+                                <td style={{ width: "10%" }}>{user.name}</td>
+                                <td style={{ width: "10%" }} >{user.email}</td>
                                 <td style={{ width: "10%" }}>{user.createdAt.substring(0, 10)}</td>
-                                <td style={{ width: "10%" }}><div class="d-grid gap-1 mx-auto">
+                                <td className="px-3" style={{ width: "10%" }}><div class="d-grid gap-1 mx-auto">
                                     <button class="btn btn-sm btn-info" type="button">Detail</button>
                                     <button onClick={() => onDeleteHandler(user)} class="btn btn-sm btn-danger" type="button">Delate</button>
                                 </div></td>

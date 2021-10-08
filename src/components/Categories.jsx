@@ -143,19 +143,19 @@ export default function Categories() {
                         count += 1;
                         return <tr key={count}>
                           <td>
-                            <div class="form-check">
-                              <label class="form-check-label" for="flexCheckDefault">
+                            <div class="form-check px-2">
+                              <label class="form-check-label fw-bold " for="flexCheckDefault">
                                 {count}
                               </label>
                             </div>
                           </td>
-                          <td>{subCate.name}</td>
-                          <td>{subCate.description}</td>
-                          <td>{cate.category}</td>
+                          <td className="ps-2">{subCate.name}</td>
+                          <td className="ps-2">{subCate.description}</td>
+                          <td className="ps-2">{cate.category}</td>
                           <td>
                             {" "}
                             <button
-                              class="btn btn-light text-light bg-danger  border"
+                              class="btn btn-light text-light bg-danger border  "
                               type="button"
                               aria-expanded="false"
                               onClick={() => deleteSubCategoryHandler({ category: cate.category, subCategory: subCate.name })}

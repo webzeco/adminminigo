@@ -22,7 +22,7 @@ export default function Baskets() {
       setBaskets(data.data);
       console.log(data.data);
     } catch (err) {
-console.log(err);
+      console.log(err);
     }
   }
   const handleChange = (e) => {
@@ -44,20 +44,20 @@ console.log(err);
     setBaskets(filtered);
     await deleteBasket(basket._id);
     getAllBasketsHandler();
-}
-const onselectHandler = async (e, id) => {
-    const preBaskets=[...baskets];
+  }
+  const onselectHandler = async (e, id) => {
+    const preBaskets = [...baskets];
     console.log(e.target.checked, id);
     try {
-       const {data}= await  updateBasket(e.target.checked,id);
-       e.target.checked=e.target.checked?false:true;
-        // console.log(data);
-        return setBaskets(data.data);
+      const { data } = await updateBasket(e.target.checked, id);
+      e.target.checked = e.target.checked ? false : true;
+      // console.log(data);
+      return setBaskets(data.data);
     } catch (error) {
-        toast.error("Something went Wrong Please Try again!!!");
-        setBaskets(preBaskets);
+      toast.error("Something went Wrong Please Try again!!!");
+      setBaskets(preBaskets);
     }
-}
+  }
   const addNewBasketHandler = async (values) => {
     try {
       const { data } = await addNewBasket(values);
@@ -68,10 +68,10 @@ const onselectHandler = async (e, id) => {
     }
   }
 
-  
+
   return (
     <div>
-      <div class="container-fluid pb-5">
+      <div class="container pb-2">
         <div class="row">
           <div class="col-lg-9 .col-md-9">
             <div class="display-6 px-3 fw-bold mt-3">Baskets</div>
@@ -82,7 +82,7 @@ const onselectHandler = async (e, id) => {
               <input
                 type="search"
                 id="form1"
-                class="form-control form-control-lg"
+                class="form-control form-control-md"
                 placeholder="Search"
                 aria-label="Search"
               />
@@ -173,12 +173,12 @@ const onselectHandler = async (e, id) => {
                   </thead>
 
                   <tbody>
-                    {console.log({baskets})}
+                    {console.log({ baskets })}
                     {baskets?.map((basket, index) => {
                       return <tr key={index}>
                         <td>
-                          <div class="form-check">
-                            <label class="form-check-label" for="flexCheckDefault">
+                          <div className="form-check px-2">
+                            <label className="form-check-label fw-bold " for="flexCheckDefault">
                               {index + 1}
                             </label>
                           </div>
@@ -189,17 +189,17 @@ const onselectHandler = async (e, id) => {
                         </td>
                         <td>{basket.title}</td>
                         <td>{basket.price}</td>
-                        <td className="px-5" style={{width:"10%"}} >
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox"  onChange={(e) => onselectHandler(e, basket._id)} id="flexSwitchCheckChecked" checked={basket.status} />
-                                </div>
-                            </td>                        <td>
+                        <td className="ps-3" style={{ width: "10%" }} >
+                          <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" onChange={(e) => onselectHandler(e, basket._id)} id="flexSwitchCheckChecked" checked={basket.status} />
+                          </div>
+                        </td>                        <td>
                           {" "}
                           <button
                             class="btn btn-light text-light bg-danger  border"
                             type="button"
                             aria-expanded="false"
-                          onClick={()=>onDeleteHandler(basket)}
+                            onClick={() => onDeleteHandler(basket)}
                           >
                             Delete
                           </button>

@@ -14,7 +14,8 @@ import products, {
 } from "../storemini/reducers/products";
 import { Link } from "react-router-dom";
 // import $ from "jquery";
-// import "./style/showComponent.css";
+import './styles/showproduct.css';
+import { faAlignJustify } from "@fortawesome/free-solid-svg-icons";
 
 class Products extends Component {
   state = {
@@ -42,11 +43,14 @@ class Products extends Component {
   render() {
     return (
       <div>
+        <div className="container">
+          <div className="display-6 px-3 fw-bold mt-3 ">All Products</div>
+        </div>
         {/* <!-- ======= price and sort of product======= -->  */}
         <div className="container-fluid border mt-1 p-2">
           <div className="row">
             <div className="col-6 text-center">
-              <div className="dropdown d-flex justify-content-center message_look">
+              <div className="dropdown d-flex justify-content- message_look">
                 <DropdownButton
                   variant="light"
                   alignRight
@@ -67,7 +71,7 @@ class Products extends Component {
                 </DropdownButton>
               </div>
             </div>
-            <div className="col-6 d-flex justify-content-center">
+            <div className="col-6 d-flex justify-content-end">
               <span type="text" className=" pt-2  count mx-3 ">
                 {this.props.itemsCount} items
               </span>
@@ -100,13 +104,13 @@ class Products extends Component {
 
         {/* <!-- ======= product display in cards ======= -->  */}
 
-        <div className="container pt-5">
+        <div className="container ">
           <div className="row ">
             {this.props.products && (
               <div class="col-lg-12 col-md-12 p-3 mt-2 ">
                 <div class="table-responsive">
                   <table class="table">
-                    <thead class="bg-info text-white ">
+                    <thead class="bg-info text-white">
                       <tr>
                         <th scope="col bold">#</th>
                         <th scope="col">Product</th>
@@ -114,20 +118,22 @@ class Products extends Component {
                         <th scope="col">Price</th>
                         <th scope="col">Remaining</th>
                         <th scope="col">Sold</th>
-                        <th scope="col">createdAt</th>
+                        <th scope="col">Created At</th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
-                    <div className='d-flex text-center mx-50'>
-                      <Loader visible={this.props.loading} type="Puff" color="#e61523" height={80} width={80} />
 
+                    <div className='loader'>
+                      <Loader visible={this.props.loading}
+                        type="Puff" color="#e61523" height={80} width={80} />
                     </div>
+
                     <tbody>
                       {this.props.products?.map((product, index) => {
                         return <tr key={index}>
                           <td>
-                            <div class="form-check">
-                              <label class="form-check-label" for="flexCheckDefault">
+                            <div class="form-check px-2">
+                              <label class="form-check-label fw-bold" for="flexCheckDefault">
                                 {index + 1}
                               </label>
                             </div>
@@ -138,10 +144,10 @@ class Products extends Component {
                           </td>
                           <td>{product.title}</td>
                           <td>{product.price}</td>
-                          <td className="px-5" style={{ width: "10%" }} >
+                          <td className="ps-4" style={{ width: "10%" }} >
                             {product.quantity}
                           </td>
-                          <td className="px-5" style={{ width: "10%" }} >
+                          <td className="ps-4" style={{ width: "10%" }} >
                             {/* <div class="form-check form-switch">
                               <input class="form-check-input" type="checkbox"
                                 // onChange={(e) => changeBestSellerHandler(e, product._id)} 
@@ -157,7 +163,7 @@ class Products extends Component {
                             <div className=" col-sm-4  col-md-2 col-lg-2">
                               <div className="pad">
                                 <div className="d-flex">
-                                  <div className="col-12 mx-4 mb-2">
+                                  <div className="col-12 ps-4 mb-2">
                                     <Link >
                                       <button
                                         type="button"
